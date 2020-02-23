@@ -1,0 +1,157 @@
+Writing down class structure:
+
+2.1
+
+University- Super class/Base class/Parent Class.
+  Discrete Mathematics, Database & Information Systems, Islamic, History-Sub Classes/Child Classes.
+Graph Theory - attribute of Discrete Mathematics
+   ORDBMS- Information Systems
+   OLAP- Distribued Systems.
+a-object in discrete mathematics,
+    b-object in database & Information systems
+    c-object in Islamic
+    d-object in History
+    a,b,c,d,e -unique courses codes.
+Professor-Class
+Experience, Qualification- Attributes of professor class
+lecture halls,workshops, seminar rooms- objects of university class
+pre_test, mid level tests, end semester tests- Obects of University class.
+calculate grade-method in university class.
+
+2.2
+
+import java.text.DateFormat;
+	import java.util.Date;
+	import java.util.Locale;
+
+	public class mydate{
+	  public static void main(String args[]) {
+	    int style = DateFormat.MEDIUM;
+	    Date date = new Date();
+	    DateFormat df;
+	    df = DateFormat.getDateInstance(style, Locale.US);
+	    System.out.println("USA: " + df.format(date));   
+	    df = DateFormat.getDateInstance(style, Locale.UK);
+	    System.out.println("UK: " + df.format(date));
+	    df = DateFormat.getDateInstance(style, Locale.JAPAN);
+	    System.out.println("Japan: " + df.format(date));
+	  }
+	}
+output:
+USA: Jan 27, 2020
+UK: 27-Jan-2020
+Japan: 2020/01/27
+
+2.3
+
+import java.util.Scanner;
+ 
+public class MatrixAddition
+{
+    public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
+         
+        System.out.println("Enter The Number Of Rows");
+         
+        int row = sc.nextInt();
+         
+        System.out.println("Enter The Number Of Columns");
+         
+        int cols = sc.nextInt();
+         
+        int[][] matrix1 = new int[row][cols];
+         
+        int[][] matrix2 = new int[row][cols];
+         
+        int[][] sum = new int[row][cols];
+         
+        System.out.println("Enter The Data For First Matrix :");
+         
+        for (int i = 0; i < row; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                matrix1[i][j] = sc.nextInt();
+            }
+        }
+         
+        System.out.println("Enter The Data For Second Matrix :");
+         
+        for (int i = 0; i < row; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                matrix2[i][j] = sc.nextInt();
+            }
+        }
+         
+        System.out.println("First Matrix = ");
+         
+        for (int i = 0; i < row; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                System.out.print(matrix1[i][j]+"\t");
+            }
+             
+            System.out.println();
+        }
+         
+        System.out.println("Second Matrix = ");
+         
+        for (int i = 0; i < row; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                System.out.print(matrix2[i][j]+"\t");
+            }
+             
+            System.out.println();
+        }
+         
+        System.out.println("Sum = ");
+         
+        for (int i = 0; i < row; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                sum[i][j] = matrix1[i][j] + matrix2[i][j];
+                 
+                System.out.print(sum[i][j]+"\t");
+            }
+             
+            System.out.println();
+        }
+    }
+}
+
+Output:
+Enter The Number Of Rows
+
+2
+Enter The Number Of Columns
+2
+Enter The Data For First Matrix :
+1
+2
+3
+4
+Enter The Data For Second Matrix :
+5
+6
+7
+8
+First Matrix = 
+1	2	
+3	4	
+Second Matrix = 
+5	6	
+7	8	
+Sum = 
+6	8	
+10	12	
+
+
+
+

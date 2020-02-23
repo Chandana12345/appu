@@ -1,0 +1,289 @@
+﻿2.1 Write a java program to print person details in the format as shown below: 
+2.3: Refer the class diagram given below and createa personclass. 
+Create default and parameterized constructor for Person class. 
+ 
+Also Create “PersonMain.java” program and write code for following operations:
+ a) Create an object of Person class and specify person details through constructor. 
+b) Display the details in the format  given in Lab assignment 2.1 
+
+package lab;
+
+public class Person {
+	String Fname;
+	String Lname;
+	 char gender;
+	 int age;
+	 float weight;
+	 
+	Person()
+	{
+		Fname="chandana";
+		Lname="Reddy";
+		gender='f';
+		age=21;
+		weight=50.3f;
+	}
+	
+	Person(String Fname,String Lname,char gender,int age,float weight)
+	{
+		this.Fname=Fname;
+		this.Lname=Lname;
+		this.gender=gender;
+		this.age=age;
+		this.weight=weight;
+	}
+
+	public String getLname() {
+		return Lname;
+	}
+	public void setLname(String lname) {
+		Lname = lname;
+	}
+	public String getFname() {
+		return Fname;
+	}
+	public void setFname(String fname) {
+		Fname = fname;
+	}
+	public char getGender() {
+		return gender;
+	}
+	public void setGender(char gender) {
+		this.gender = gender;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public float getWeight() {
+		return weight;
+	}
+	public void setWeight(float weight) {
+		this.weight = weight;
+	}
+}
+package lab;
+
+public class personain {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Person p=new Person();
+		System.out.println("Fname is"+p.Fname);
+		System.out.println("Lname is"+p.Lname);
+		System.out.println("genger is"+p.gender);
+		System.out.println("age is"+p.age);
+		System.out.println("weight is"+p.weight);
+		Person p2=new Person("chandana","Reddy",'m',20,67.8f);
+		System.out.println("Fname is"+p2.getFname());
+		System.out.println("Lname is"+p2.getLname());
+		System.out.println("genger is"+p2.getGender());
+		System.out.println("age is"+p2.getAge());
+		System.out.println("weight is"+p2.getWeight());
+	}
+
+}
+
+2.2:  Write a program to accept a number from user as a command line argument and check whether the given number is positive or negative number
+package lab;
+public class CheckNumber {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int a=Integer.parseInt(args[0]);
+		if(a>=0)
+			System.out.println("+ve int");
+		else
+			System.out.println("-ve int");
+		
+
+	}
+}
+2.4: Modify Lab assignment 2.3 to accept phone number of a person. Create a newmethod to implement the same and also define method for displaying persondetails. 
+package lab;
+
+class Person5
+{
+		private String Fname;
+		private String Lname;
+		private char gender;
+		private int age;
+		private double weight;
+		private long number;
+
+
+		Person5(String Fname,String Lname,
+			char gender,
+			int age,
+			double weight,long number){
+			 this.Fname=Fname;
+			 this.Lname=Lname;
+			 this.gender=gender;
+			 this.age=age;
+			 this.weight=weight;
+			 this.number=number;
+		}
+		
+		public long getNumber() {
+			return number;
+		}
+
+		public void setNumber(long number) {
+			this.number = number;
+		}
+
+		public String getFname() {
+			return Fname;
+		}
+		public void setFname(String fname) {
+			this.Fname = fname;
+		}
+		public String getLname() {
+			return Lname;
+		}
+		public void setLname(String lname) {
+			this.Lname = lname;
+		}
+		public char getGender() {
+			return gender;
+		}
+		public void setGender(char gender) {
+			this.gender = gender;
+		}
+		public int getAge() {
+			return age;
+		}
+		public void setAge(int age) {
+			this.age = age;
+		}
+		public double getWeight() {
+			return weight;
+		}
+
+		
+		public void setWeight(double weight) {
+			this.weight = weight;
+		}
+	 
+	}
+	public class GetSet {
+		
+			public static void main(String[] args){
+				Person5 p=new Person5("Divya", "Bharathi",'F',20,85.55,994831599) ;
+				
+				System.out.println("First name:"+p.getFname());
+				System.out.println("Last name:"+p.getLname());
+				System.out.println("Age:"+p.getAge());
+				System.out.println("Gender:"+p.getGender());
+				System.out.println("Weight:"+p.getWeight());	
+				System.out.println("number:"+p.getNumber());
+			}
+			
+			
+	}
+
+
+
+2.5: Modify the above program, to accept only ‘M’ or ‘F’ as gender field values. Use Enumeration for implementing the same. 
+package lab;
+
+public class gender {
+
+	/**
+	 * @param args
+	 */
+	String Fname;
+	String Lname;
+	 gender1 gender;
+	 int age;
+	 float weight;
+	 String phno;
+	 enum gender1 {M,m,F,f };
+	 
+	
+	gender()
+	{
+		Fname="chandana";
+		Lname="Reddy";
+		age=21;
+		gender=gender1.f;
+		weight=50.3f;
+		phno="7780233017";
+	}
+	
+	gender(String Fname,String Lname,gender1 gender,int age,float weight,String phno)
+	{
+		this.Fname=Fname;
+		this.Lname=Lname;
+		this.gender=gender;
+		this.age=age;
+		this.weight=weight;
+		this.phno=phno;
+	}
+
+	public String getLname() {
+		return Lname;
+	}
+	public void setLname(String lname) {
+		Lname = lname;
+	}
+	public String getFname() {
+		return Fname;
+	}
+	public void setFname(String fname) {
+		Fname = fname;
+	}
+	public gender1 getGender() {
+		return gender;
+	}
+	public gender1 setGender(gender1 gender) {
+		return this.gender = gender;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public float getWeight() {
+		return weight;
+	}
+	public void setWeight(float weight) {
+		this.weight = weight;
+	}
+	public String getPhno() {
+		return phno;
+	}
+
+
+	public void setPhno(String phno) {
+		this.phno = phno;
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		gender p=new gender();
+		System.out.println("Fname is"+p.Fname);
+		System.out.println("Lname is"+p.Lname);
+		System.out.println("gender is"+p.gender);
+		System.out.println("age is"+p.age);
+		System.out.println("weight is"+p.weight);
+		System.out.println("phno:"+p.phno);
+		gender p2=new gender("chandana","Reddy",gender1.f,20,57.7f,"9100980751");
+		System.out.println("Fname is"+p2.getFname());
+		System.out.println("Lname is"+p2.getLname());
+		System.out.println("gender is"+p2.getGender());
+		System.out.println("age is"+p2.getAge());
+		System.out.println("weight is"+p2.getWeight());
+		System.out.println("phno:"+p2.getPhno());
+	}
+
+}
+

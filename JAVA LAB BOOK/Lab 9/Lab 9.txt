@@ -1,0 +1,228 @@
+9.2: Writing JUnit tests 
+Consider the following Java program. Write tests for testing various methods in the class 
+package junitproject;
+
+class Date      
+{  
+	int intDay, intMonth, intYear;  
+// Constructor 
+	Date(int intDay, int intMonth, int intYear) 
+	{
+		this.intDay = intDay; this.intMonth = intMonth; this.intYear = intYear;  } 
+// setter and getter methods
+	void setDay(int intDay)  
+	{
+		this.intDay = intDay; 
+	} 
+	int getDay( )
+	{
+		return  this.intDay; 
+	}  
+	void setMonth(int intMonth)  
+	{
+		this.intMonth = intMonth;
+	} 
+
+	int getMonth( ) 
+	{
+		return  this.intMonth;
+	} 
+
+	void setYear(int intYear) 
+	{
+		this.intYear=intYear; 
+	} 
+
+
+
+	int getYear( )
+	{
+		return  this.intYear; 
+	}  
+	public String toString()
+//converts date obj to string.   
+	{  
+		return "Date is "+ intDay+"/"+intMonth+"/" +intYear; 
+	}
+	public static void main(String[] args)
+	{
+	Date d1=new Date(12,12,2012);
+	d1.setYear(2015);
+	}
+}// Date class 
+
+package junitproject;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+
+public class DateTest {
+
+	@Test
+	public void testSetDay() {
+		System.out.println("From TestPerson2");
+		Date d=new Date(12,11,2011);
+		assertEquals(12,d.getDay());;
+	}
+
+	@Test
+	public void testGetDay() {
+		System.out.println("From TestPerson2");
+		Date d1=new Date(12,12,2012);
+		assertEquals("12",d1.getDay());
+	}
+
+	@Test
+	public void testSetMonth() {
+		System.out.println("From TestPerson2");
+		Date d2=new Date(12,12,2012);
+		assertEquals("12",d2.getMonth());
+	}
+
+	@Test
+	public void testGetMonth() {
+		System.out.println("From TestPerson2");
+		Date d3=new Date(12,12,2012);
+		assertEquals("12",d3.getMonth());
+	}
+
+	@Test
+	public void testSetYear() {
+		System.out.println("From TestPerson2");
+		Date d4=new Date(12,12,2012);
+		assertEquals("12",d4.getYear());
+	}
+
+	@Test
+	public void testGetYear() {
+		System.out.println("From TestPerson2");
+		Date d5=new Date(12,12,2012);
+		assertEquals("12",d5.getYear());
+	}
+
+	@Test
+	public void testToString() {
+		System.out.println("From TestPerson2");
+		Date d6=new Date(12,12,2012);
+		
+	}
+
+}
+
+9.2.1: Consider the Person class created in lab assignment 2.3. This class has some members and corresponding setter and getter methods. Write test case to check the functionality of getter methods and displaydetails method
+package Lab9;
+
+ class Person {
+	private String firstName;
+	private String lastName;
+	
+	public Person(String fname, String lname)
+	{
+		if(fname==null&&lname==null)
+		{
+			throw new IllegalArgumentException("Both Names Cannot be NULL");
+		}
+		this.firstName=fname;
+		this.lastName=lname;
+	}
+	public String getFullname()
+	{
+		String first=(this.firstName!=null)?this.firstName:"?";
+		String last=(this.lastName!=null)?this.lastName:"?";
+		return first+" "+last;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	
+	public String getLastName() {
+		return lastName;
+	}
+}
+package Lab9;
+
+import org.junit.*;
+import static org.junit.Assert.*;
+import org.junit.Test;
+
+//import junitproject.Person;
+
+public class TestPerson2 {
+	@Test
+	public void testPerson()
+	{
+		
+	}
+	@Test
+	public void testGetFirstName()
+	{
+		System.out.println("From TestPerson2");
+		Person per=new Person("Robert","King");
+		assertEquals("Robert",per.getFirstName());
+	}
+	@Test
+	public void testGetLastName()
+	{
+		System.out.println("From TestPerson2");
+		Person per=new Person("Robert","King");
+		assertEquals("King",per.getLastName());
+	}
+	@Test
+	public void testGetFullName()
+	{
+		System.out.println("From TestPerson2");
+		Person per=new Person("Robert","King");
+		assertEquals("Robert King",per.getFullname());
+	}
+	@Test(expected= IllegalArgumentException.class)
+	public void testNullslnName()
+	{
+		System.out.println("from TestPerson2 testing exceptions");
+		Person per1=new Person(null,null);
+	}
+	
+
+}
+9.2.2: Consider the lab assignment 6.3 from Exception Handling Lab. Create a new class ExceptionCheck.javawhich handles an exception. Write a test case to verify if the exception is being handled correctly.
+
+package com.cg.eis.exception;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import com.cg.eis.bean.Employee;
+
+public class ExceptionCheck {
+
+	@Test
+	public void testEmployeeException() {
+		System.out.println("exception check1");
+		Employee e = new Employee();
+		assertEquals(10,e.getId());
+	}
+
+	@Test
+	public void testEmployeeExceptionString() {
+		System.out.println("exception check2");
+		Employee e1 = new Employee();
+		assertEquals("chandana",e1.getName());
+	}
+
+	@Test
+	public void testToString() {
+		System.out.println("exception check3");
+		Employee e2 = new Employee();
+		assertEquals("chakri",e2.getClass().getName());
+	}
+
+	@Test
+	public void testGetMessage() {
+		System.out.println("exception check4");
+		Employee e3 = new Employee();
+		assertEquals(10,e3.getId());
+	}
+
+}

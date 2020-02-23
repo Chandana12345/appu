@@ -1,0 +1,26 @@
+﻿1.	And  2. $ mkdir lab1 && cd lab1
+$ touch info.txt
+(Add text “Project” in info.txt)
+$ git add .
+$ git commit -m “Initial Commit”
+$ git branch Development
+$ git branch Testing
+$ git remote add github https://github.com/Chandana12345/MyNewRepository.git $ git push github master Development Testing
+
+3.Cloning to Development Machine (C)
+  $  git clone --branch Development https://github.com/Chandana12345/MyNewRepository.git   $ git remote add github https://github.com/Chandana01/lab1.git
+4.Cloning into Testing Machine (D)
+  $  git clone --branch Testing https://github.com/Chandana12345/MyNewRepository.git  $ git remote add github https://github.com/Chandana01/lab1.git
+
+5.On C
+  $ touch MyJavaCode.txt
+    $ git add .
+  $ git commit -m “Added MyJavaCode.txt”
+    $ git push github Development
+ On D
+  $ touch MyJUnitTestCase.txt
+  $ git add .
+ $ git commit -m “AddedMyJUnitTestCase.txt”
+  $ git push github Testing
+Pulling changes from D
+  $ git pull github Testing

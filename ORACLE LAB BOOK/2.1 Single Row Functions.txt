@@ -1,0 +1,229 @@
+1.)
+
+Create a query which will display Staff Name, Salary of each staff. 
+Format the salary to be 15 characters long and left padded with ‘$’.
+
+A.)
+
+
+SQL> select Staff_Name as Name,LPAD(Staff_sal,15,'$') as Salary from Staff_Master;
+
+NAME
+--------------------------------------------------
+SALARY
+------------------------------------------------------------
+S
+$$$$$$$$$$67000
+
+G
+$$$$$$$$$$65000
+
+H
+$$$$$$$$$$25000
+
+
+NAME
+--------------------------------------------------
+SALARY
+------------------------------------------------------------
+J
+$$$$$$$$$$45000
+
+K
+$$$$$$$$$$60000
+
+P
+$$$$$$$$$$37000
+
+
+6 rows selected.
+
+2.)
+
+Display name and date of birth of students 
+where date of birth must be displayed in the format similar to “January, 12 1981” 
+for those who were born on Saturday or Sunday.
+
+A.)
+
+
+SQL> Select Staff_Name as Name,to_char(Staff_dob,'month, dd yyyy') as DOB from Staff_Master
+  2  where MOD(to_Char(Staff_dob,'D')+5,7)=5 or MOD(to_Char(Staff_dob,'D')+5,7)=6 ;
+
+NAME
+--------------------------------------------------
+DOB
+---------------------------------------------
+S
+may      , 31 1998
+
+J
+september, 20 1987
+
+
+
+3.)
+
+Display each Staff name and number of months they worked for the organization. 
+Label the column as ‘Months Worked’. 
+Order your result by number of months employed. 
+Also Round the number of months to closest whole number.
+
+A.)
+
+
+SQL> Select Staff_Name as Name,round(Months_Between(SYSDate,HireDate),0) as Months_Worked
+  2  from Staff_Master
+  3  order by round(Months_Between(SYSDate,HireDate),0) ASC;
+
+NAME                                               MONTHS_WORKED
+-------------------------------------------------- -------------
+G                                                             -1
+S                                                             20
+P                                                            143
+K                                                            153
+J                                                            157
+H                                                            160
+
+6 rows selected.
+
+4.)
+
+List the details of the staff who have joined in second half of December month (irrespective of the year).
+
+A.)
+
+
+SQL> select * from Staff_Master s
+  2  where to_char(s.HireDate,'mon')='dec'
+  3  and to_number(to_char(s.HireDate,'DD'))>=15;
+
+STAFF_CODE STAFF_NAME                                         DESIGN_CODE
+---------- -------------------------------------------------- -----------
+ DEPT_CODE HIREDATE  STAFF_DOB
+---------- --------- ---------
+STAFF_ADDRESS
+--------------------------------------------------------------------------------
+  MGR_CODE  STAFF_SAL
+---------- ----------
+       904 J                                                          126
+        44 25-DEC-06 20-SEP-87
+149/76,Bandlaguda
+       141      45000
+
+5.)
+
+Write a query that displays Staff Name, Salary, and Grade of all staff. Grade depends on the following table. 
+Salary	Grade
+Salary >=50000	A
+Salary >= 25000 < 50000	B
+Salary>=10000 < 25000	C
+OTHERS	D
+
+A.)
+
+SQL> select Staff_Name,staff_sal,
+  2  CASE
+  3  when staff_sal>=50000 THEN 'A'
+  4  when staff_sal>=25000 and staff_sal<50000 THEN 'B'
+  5  when staff_sal>=10000 and staff_sal<25000 Then 'C'
+  6  when staff_sal<10000 Then 'D'
+  7  END as Grade
+  8  from Staff_Master;
+
+STAFF_NAME                                          STAFF_SAL GRADE
+-------------------------------------------------- ---------- ------
+S                                                       67000 A
+G                                                       65000 A
+H                                                       25000 B
+J                                                       45000 B
+K                                                       60000 A
+P                                                       37000 B
+
+6 rows selected.
+
+
+6.)
+
+Display the Staff Name, Hire date and day of the week on which staff was hired. 
+Label the column as DAY. Order the result by the day of the week starting with Monday.        
+Hint :Use to_char with hiredate and formats ‘DY’ and ’D’
+
+A.)
+
+
+SQL> Select Staff_Name,HireDate,to_char(HireDate,'Dy') as Day
+  2  from Staff_Master order by MOD(to_char(HireDate,'D')+5,7);
+
+STAFF_NAME                                         HIREDATE  DAY
+-------------------------------------------------- --------- ------------
+J                                                  25-DEC-06 Mon
+G                                                  02-MAR-20 Mon
+H                                                  20-SEP-06 Wed
+S                                                  31-MAY-18 Thu
+K                                                  29-APR-07 Sun
+P                                                  17-FEB-08 Sun
+
+6 rows selected.
+
+7.)
+
+Write a query to find the position of third occurrence of ‘i’ in the given word ‘Mississippi’. 
+
+A.)
+
+
+SQL> Select instr('Mississippi','i',1,3) as Occurence  from dual;
+
+ OCCURENCE
+----------
+         8
+
+8.)
+
+Write a query to find the pay date for the month. 
+Pay date is the last Friday of the month. 
+Display the date in the format “Twenty Eighth of January, 2002”. 
+Label the heading as PAY DATE. 
+Hint: use to_char, next_day and last_day functions
+
+
+A.)
+
+
+SQL> SELECT To_CHAR((NEXT_DAY(LAST_DAY( SYSDATE ) - 7 ,'FRIDAY')),'DDspth "of" Month, yyyy' )as "Pay Date" FROM   DUAL;
+
+Pay Date
+------------------------------------------------------------
+THIRTY-FIRST of January  , 2020
+
+
+9.)
+
+Display “Electricals” if dept code = 22, 
+“Electronics” if Dept code =33 and 
+“Others” for all other Dept codes in the Dept Name column. 
+Hint : Use Decode 
+
+A.)
+
+
+SQL> Select s.Student_Code as Rollno,s.Student_name as Name,
+  2  Decode(d.Dept_Code,
+  3  22,'Electricals',
+  4  33,'Electronics',
+  5  'others')Dept_name from Student_Master s,
+  6  Department_Master d
+  7  where s.Dept_Code = d.Dept_Code;
+
+    ROLLNO NAME                                               DEPT_NAME
+---------- -------------------------------------------------- -----------
+       201 M                                                  others
+       202 N                                                  Electricals
+       203 V                                                  others
+       204 X                                                  Electronics
+       205 Z                                                  others
+       206 L                                                  others
+
+6 rows selected.
+

@@ -1,0 +1,121 @@
+13.1: Write a program to do the following operations using Thread:  Create an user defined Thread class called as “CopyDataThread .java” .  This class will be designed to copy the content from one file “source.txt ” to another file “target.txt” and after every 10 characters copied,   “10 characters are copied” message  will be shown to user.(Keep delay of 5 seconds after every 10 characters  read.)  Create another class “FileProgram.java” which will create above thread. Pass required File Stream classes to  CopyDataThread constructor and implement the above functionality. 
+package Lab13;
+
+
+import java.util.*;
+
+public class TimerThread implements Runnable
+{
+
+	public static void main(String[] args) 
+	{
+		//Task t1 = new Task("task1");
+		Timer t = new Timer();
+		//t.schedule(task,10000);
+	}
+
+	public void run() 
+	{
+		
+	}
+
+}
+package Lab13;
+
+import java.io.*;
+
+public class CopyDataThread 
+{
+	public CopyDataThread(FileReader fi,FileWriter fw)throws Exception
+	{
+		BufferedReader br = new BufferedReader(fi);
+		BufferedWriter bw = new BufferedWriter(fw);
+		String data = null;
+		int j=10;
+		while((data=br.readLine())!=null)
+		{
+			char[] c = data.toCharArray();
+			for(int i=0;i<c.length;i++)
+			{
+				bw.write(c[i]);
+				if(i==j)
+				{
+					j+=10;
+					System.out.println("10 characters copied");
+					Thread.sleep(5000);
+				}	
+			}
+			
+		}
+		br.close();
+		bw.close();
+		fi.close();
+		fw.close();
+	}
+
+
+}
+package Lab13;
+
+import java.io.FileReader;
+import java.io.FileWriter;
+
+public class FileProgram extends Thread 
+{
+	public static void main(String[] args)throws Exception 
+	{
+		FileReader fi = new FileReader("F:\\cap\\source.txt");
+		FileWriter fw = new FileWriter("F:\\cap\\target.txt");
+		CopyDataThread c = new CopyDataThread(fi,fw);
+	}
+}
+
+
+13.2: Write a thread program to display timer where timer will get refresh after every 10seconds.( Use Runnable implementation ) 
+ package Lab13;
+
+
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class MyTimerTask extends TimerTask {
+
+    @Override
+    public void run() {
+        System.out.println("Timer task started at:"+new Date());
+        completeTask();
+        System.out.println("Timer task finished at:"+new Date());
+    }
+
+    private void completeTask() {
+        try {
+            //assuming it takes 5 secs to complete the task
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void main(String args[]){
+        TimerTask timerTask = new MyTimerTask();
+        //running timer task as daemon thread
+        Timer timer = new Timer(true);
+        timer.scheduleAtFixedRate(timerTask, 0, 10*1000);
+        System.out.println("TimerTask started");
+        //cancel after sometime
+        try {
+            Thread.sleep(120000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        timer.cancel();
+        System.out.println("TimerTask cancelled");
+        try {
+            Thread.sleep(30000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+}

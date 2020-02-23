@@ -1,0 +1,171 @@
+
+SQL*Plus: Release 18.0.0.0.0 - Production on Thu Jan 23 14:02:37 2020
+Version 18.4.0.0.0
+
+Copyright (c) 1982, 2018, Oracle.  All rights reserved.
+
+Enter user-name: sys as sysdba
+Enter password:
+
+Connected to:
+Oracle Database 18c Express Edition Release 18.0.0.0.0 - Production
+Version 18.4.0.0.0
+
+SQL> CREATE TABLE Designation_Master
+  2  (
+  3  Design_code Number(3) Not Null Primary Key,
+  4  Design_name varchar2(50)
+  5  );
+
+Table created.
+
+
+SQL> CREATE TABLE Department_Master
+  2  (
+  3  Dept_Code Number(2) Not Null Primary Key,
+  4  Dept_name varchar2(50)
+  5  );
+
+Table created.
+
+SQL> Desc Emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(4)
+ ENAME                                              VARCHAR2(10)
+ JOB                                                VARCHAR2(9)
+ MGR                                                NUMBER(4)
+ HIREDATE                                           DATE
+ SAL                                                NUMBER(7,2)
+ COMM                                               NUMBER(7,2)
+ DEPTNO                                             NUMBER(2)
+
+
+
+SQL> CREATE TABLE Student_Master
+  2  (
+  3  Student_Code Number(6) Not Null Primary Key,
+  4  Student_name Varchar2(50) Not Null,
+  5  Dept_Code Number(2),
+  6  Student_dob Date,
+  7  Student_Address Varchar2(240),
+  8  Foreign Key(Dept_Code)
+  9  References Department_Master(Dept_Code)
+ 10  );
+
+Table created.
+
+SQL> desc Student_Master
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STUDENT_CODE                              NOT NULL NUMBER(6)
+ STUDENT_NAME                              NOT NULL VARCHAR2(50)
+ DEPT_CODE                                          NUMBER(2)
+ STUDENT_DOB                                        DATE
+ STUDENT_ADDRESS                                    VARCHAR2(240)
+
+
+SQL> CREATE TABLE Student_Marks
+  2  (
+  3  Student_Code Number(6),
+  4  Student_Year Number Not Null,
+  5  SUbject1 Number(3),
+  6  SUbject2 Number(3),
+  7  SUbject3 Number(3),
+  8  Foreign Key(Student_Code)
+  9  References Student_Master(Student_Code)
+ 10  );
+
+Table created.
+
+SQL> desc Student_Marks;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STUDENT_CODE                                       NUMBER(6)
+ STUDENT_YEAR                              NOT NULL NUMBER
+ SUBJECT1                                           NUMBER(3)
+ SUBJECT2                                           NUMBER(3)
+ SUBJECT3                                           NUMBER(3)
+
+
+SQL> CREATE TABLE Staff_Master
+  2  (
+  3  Staff_Code Number(8) Not Null Primary Key,
+  4  Staff_Name Varchar2(50) Not Null,
+  5  Design_code Number,
+  6  Dept_Code Number,
+  7  HireDate Date,
+  8  Staff_dob Date,
+  9  Staff_address Varchar2(240),
+ 10  Mgr_code Number(8),
+ 11  Staff_sal Number(10,2),
+ 12  Foreign Key(Design_code)
+ 13  References Designation_Master(Design_code),
+ 14  Foreign key(Dept_Code)
+ 15  References Department_Master(Dept_Code)
+ 16  );
+
+Table created.
+
+SQL> desc Staff_Master
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STAFF_CODE                                NOT NULL NUMBER(8)
+ STAFF_NAME                                NOT NULL VARCHAR2(50)
+ DESIGN_CODE                                        NUMBER
+ DEPT_CODE                                          NUMBER
+ HIREDATE                                           DATE
+ STAFF_DOB                                          DATE
+ STAFF_ADDRESS                                      VARCHAR2(240)
+ MGR_CODE                                           NUMBER(8)
+ STAFF_SAL                                          NUMBER(10,2)
+
+
+SQL> CREATE TABLE Book_Master
+  2  (
+  3  Book_Code Number(10) Not Null Primary Key,
+  4  Book_Name Varchar2(50) Not Null,
+  5  Book_pub_year Number,
+  6  Book_pub_author Varchar2(50) Not Null
+  7  );
+
+Table created.
+
+SQL> desc Book_Master;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ BOOK_CODE                                 NOT NULL NUMBER(10)
+ BOOK_NAME                                 NOT NULL VARCHAR2(50)
+ BOOK_PUB_YEAR                                      NUMBER
+ BOOK_PUB_AUTHOR                           NOT NULL VARCHAR2(50)
+
+
+SQL> CREATE TABLE Book_Transactions
+  2  (
+  3  Book_Code Number,
+  4  Student_Code Number,
+  5  Staff_code Number,
+  6  Book_issue_date Date Not Null,
+  7  Book_expected_return_date Date Not Null,
+  8  Book_actual_return_date Date,
+  9  Foreign Key(Book_Code)
+ 10  References Book_Master(Book_Code),
+ 11  Foreign Key(Staff_code)
+ 12  References Staff_Master(Staff_code),
+ 13  Foreign Key(Student_Code)
+ 14  References Student_Master(Student_Code)
+ 15  );
+
+Table created.
+
+SQL> desc Book_Transactions;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ BOOK_CODE                                          NUMBER
+ STUDENT_CODE                                       NUMBER
+ STAFF_CODE                                         NUMBER
+ BOOK_ISSUE_DATE                           NOT NULL DATE
+ BOOK_EXPECTED_RETURN_DATE                 NOT NULL DATE
+ BOOK_ACTUAL_RETURN_DATE                            DATE
+
+

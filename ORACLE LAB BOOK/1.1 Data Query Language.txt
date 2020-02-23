@@ -1,0 +1,103 @@
+1.)
+List the Name and Designation code of the staff who have joined before Jan 2003 
+and whose salary range is between 12000 and 25000. 
+Display the columns with user defined Column headers. 
+Hint: Use As clause along with other operators
+
+A.)
+
+SQL> select s.Staff_Name as Name,d.Design_code as Designation from
+  2  Staff_master s,Designation_master d
+  3  where s.Design_code = d.Design_code and
+  4  HireDate<'01-Jan-20' and
+  5  Staff_sal Between 12000 and 25000;
+
+NAME                                               DESIGNATION
+-------------------------------------------------- -----------
+H                                                          125
+
+2.)
+List the staff code, name, and department number of the staff 
+who have experience of 18 or more years and 
+sort them based on their experience. 
+
+A.)
+
+
+SQL> select s.Staff_Code as Code,s.Staff_Name as Name,d.Dept_Code as Department,round(((SYSDATE-HireDate)/365),0)
+  2  as Experience from Staff_master s,Department_master d
+  3  where s.Dept_Code = d.Dept_Code and
+  4  ((SYSDATE-HireDate)/365)>=11
+  5  ORDER BY
+  6  ((SYSDATE-HireDate)/365) ASC;
+
+      CODE NAME                                               DEPARTMENT
+---------- -------------------------------------------------- ----------
+EXPERIENCE
+----------
+       906 P                                                          66
+        12
+
+       905 K                                                          55
+        13
+
+       904 J                                                          44
+        13
+
+
+      CODE NAME                                               DEPARTMENT
+---------- -------------------------------------------------- ----------
+EXPERIENCE
+----------
+       903 H                                                          33
+        13
+3.)
+
+Display the staff details who do not have manager. 
+Hint: Use is null
+
+A.)
+
+
+SQL> select * from Staff_Master where Mgr_code is NULL;
+
+no rows selected
+
+4.)
+
+Display the Book details that were published during the period of 2001 to 2006 
+Also display book details with Book name having the character ‘&’ anywhere.
+
+A.)
+
+
+SQL> set escape /;
+SQL> insert into Book_Master values(507,'Python /&/ ML',2005,'Ajkl');
+
+1 row created.
+
+SQL> select * from Book_Master where
+  2  Book_pub_year Between 2001 and 2006
+  3  or Book_Name like '% & %';
+
+ BOOK_CODE BOOK_NAME                                          BOOK_PUB_YEAR
+---------- -------------------------------------------------- -------------
+BOOK_PUB_AUTHOR
+--------------------------------------------------
+       507 Python & ML                                                 2005
+Ajkl
+
+
+
+5.)
+
+List the names of the staff having ‘_’ character in their name. 
+
+A.)
+
+
+SQL> select Staff_Name as Name from Staff_Master where Staff_Name like '%\_%' escape '\';
+
+no rows selected
+
+

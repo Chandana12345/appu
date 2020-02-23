@@ -1,0 +1,172 @@
+14.1: Write a lambda expression which accepts x and y numbers and return xy. 
+ package lab14;
+import java.util.function.*;
+@FunctionalInterface
+interface NumberTest
+{ 
+	public double exp(double x,double y);
+} 
+public class NumberExponent 
+{
+public static void main(String[] args)
+{
+   BiFunction<Double,Double,Double> bi=(x,y)->Math.pow(x,y);
+  
+	System.out.println("exponent is: "+bi.apply(5.0, 2.0));
+	
+}
+}
+
+14.2: Write a method that uses lambda expression to format a given string, where a space is inserted between each character of string.  For ex., if input is “CG”, then expected output is “C G”. 
+ package lab14;
+
+import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
+import java.util.function.Supplier;
+
+/* @FunctionalInterface
+interface StringDemo {
+	String convertedString(String s);
+}
+
+class StringConversion {
+	public String convertedString(String s) {
+		StringBuffer sb = new StringBuffer();
+		char[] str = s.toCharArray();
+		for (int i = 0; i < str.length; i++) {
+			sb.append(str[i]);
+			sb.append(" ");
+		}
+		String st = sb.toString();
+		return st;
+	}
+}
+*/
+public class LambdaDemo {
+
+	public static void main(String[] args) {
+		BiFunction<Integer, Integer, Double> power = (a, b) -> Math.pow(a, b);
+		System.out.println(power.apply(10, 3));
+		
+		/*StringConversion sc = new StringConversion();
+		String s = "raju";
+		Function<String, String> result = sc::convertedString;
+		System.out.println(result.apply(s));*/
+		String s = "raju";
+		Supplier<String> result = () -> s.replace("", " ").trim();
+		System.out.println(result.get());
+		
+        BiPredicate<String,String> valid = (user,pass) -> (user.substring(0, pass.length()).equals(pass));
+		System.out.println(valid.test("rahulravindran", "rahuli"));
+	}
+	
+}
+14.3: Write a method that uses lambda expression to accept username and password and return true or false. (Hint: Use any custom values for username and password for authentication) 
+ package lab14;
+
+import java.util.Scanner;
+import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
+
+@SuppressWarnings("unused")
+public class UserPass 
+{
+public static void check(String user,String pwd)
+{
+BiPredicate<String,String> bp= (u,p)->{
+if(user.equals("karthik") && pwd.equals("karu"))
+return true;
+else
+return false;
+};
+System.out.println(bp.test(user, pwd));
+}
+public static void main(String[] args) {
+// TODO Auto-generated method stub
+@SuppressWarnings("resource")
+Scanner sc=new Scanner(System.in);
+System.out.println("Enter user name");
+String uname=sc.next();
+System.out.println("Enter password");
+String pwd=sc.next();
+check(uname,pwd);
+}
+}
+
+/*
+public static void main(String[] args)
+{
+BiFunction<String, String, Boolean> str = (user,pwd)->{if(user == "divya" && pwd == "root")
+return true;
+else
+return false;
+};
+System.out.println("The user name and password are " +str.apply("divya","root"));
+}*/
+
+14.4: Write a class with main method to demonstrate instance creation using method reference. (Hint: Create any simple class with attributes and getters and setters) 
+package Lab14;
+
+interface MethodReferenceInterface
+{
+	MethodReferenceEx display(String a,String b);
+}
+class MethodReferenceEx 
+{
+String first,last;
+MethodReferenceEx(String first,String last)
+{
+	this.first=first;
+	this.last=last;
+	System.out.println(first+" "+last);
+}
+public String getFirst() {
+	return first;
+}
+public void setFirst(String first) {
+	this.first = first;
+}
+public String getLast() {
+	return last;
+}
+public void setLast(String last) {
+	this.last = last;
+}
+}
+public  class MethodReferenceDemo
+{
+	public static void main(String args[])
+	{
+		MethodReferenceInterface mr=MethodReferenceEx::new;
+		mr.display("karthik", "shegu");
+	}
+}
+
+14.5: Write a method to calculate factorial of a number. Test this method using method reference feature.  
+ package lab14;
+
+import java.util.Scanner;
+import java.util.function.Function;
+
+public class Factorial
+{
+public static int factorial(int n)
+{
+	int res=1;
+	for(int i=1;i<=n;i++)
+	{
+		res=res*i;
+	}
+	return res;
+}
+public static void main(String[] args)
+{
+	Scanner sc=new Scanner(System.in);
+	System.out.println("Enter the num");
+	int n=sc.nextInt();
+	Function<Integer,Integer> fact=Factorial::factorial;
+	System.out.println("factorial of " +n+ " is= "+fact.apply(n));
+	sc.close();
+}
+	
+}

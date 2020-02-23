@@ -1,0 +1,415 @@
+﻿6.1: Modify the Lab assignment 2.3 to validate the full name of an employee. Create and throw a user defined exception if firstName and lastName is blank. 
+
+
+package lab;
+
+public class Person {
+	String Fname;
+	String Lname;
+	 char gender;
+	 int age;
+	 float weight;
+	 
+	Person()
+	{
+		Fname="Chandana";
+		Lname="Reddy";
+		gender='f';
+		age=21;
+		weight=50.3f;
+	}
+	
+	Person(String Fname,String Lname,char gender,int age,float weight)
+	{
+		this.Fname=Fname;
+		this.Lname=Lname;
+		this.gender=gender;
+		this.age=age;
+		this.weight=weight;
+	}
+
+	public String getLname() {
+		return Lname;
+	}
+	public void setLname(String lname) {
+		Lname = lname;
+	}
+	public String getFname() {
+		return Fname;
+	}
+	public void setFname(String fname) {
+		Fname = fname;
+	}
+	public char getGender() {
+		return gender;
+	}
+	public void setGender(char gender) {
+		this.gender = gender;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public float getWeight() {
+		return weight;
+	}
+	public void setWeight(float weight) {
+		this.weight = weight;
+	}
+}
+package lab;
+
+import java.util.Scanner;
+
+public class personException {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub		
+		Person p1 = new Person();
+		System.out.println("Fname is : "+p1.Fname);
+		System.out.println("Lname is : "+p1.Lname);
+		System.out.println("gender is : "+p1.gender);
+		System.out.println("age is : "+p1.age);
+		System.out.println("weight is : "+p1.weight);
+	
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Please enter your first name : ");
+		String fname = sc.nextLine();
+		System.out.print("Please enter your last name : ");
+		String lname = sc.nextLine();
+	
+		try
+		{
+			if((fname.equals("") && lname.equals("")))
+				throw new NullPointerException("Null Entry");
+			else
+			{
+				Person p2 = new Person(fname,lname,'m',20,67.8f);
+				System.out.println("Fname is "+p2.getFname());
+				System.out.println("Lname is "+p2.getLname());
+				System.out.println("gender is "+p2.getGender());
+				System.out.println("age is "+p2.getAge());
+				System.out.println("weight is "+p2.getWeight());
+			}
+		}
+		catch(NullPointerException e)
+		{
+			System.out.println("This field should not be empty..."+e.getMessage());
+		}
+	}	
+}
+
+6.2: Validate the age of a person in Lab assignment 4.2 and display proper message by using user defined exception. Age of a person should be above 15
+class AgeException extends Exception{
+public AgeException(String s) {
+
+super(s);
+}
+}
+class Person {
+private String name;
+private float age;
+public String getName() {
+return name;
+}
+
+public void setName(String name) {
+this.name = name;
+}
+
+public float getAge() {
+try {
+if(age<15.0) {
+
+throw new AgeException("Age should be greater than 15");
+}
+}catch(AgeException e) {
+System.out.println(e);
+}
+return age;
+
+}
+
+public void setAge(float age) {
+this.age = age;
+
+}
+
+
+}
+
+abstract class Account extends Person {
+private static long count = 0;
+private long accNum;
+private double balance;
+private Person accHolder;
+
+public long getAccNum() {
+return accNum;
+}
+
+public void setAccNum(long accNum) {
+this.accNum = accNum;
+}
+
+public Person getAccHolder() {
+return accHolder;
+}
+
+public void setAccHolder(Person accHolder) {
+this.accHolder = accHolder;
+}
+
+public void setBalance(double balance) {
+this.balance = balance;
+}
+
+public void deposit(double amount) {
+balance += amount;
+}
+
+public abstract void withdraw(double amount);
+/*{
+balance -= amount;
+}
+*/
+public double getBalance() {
+return balance;
+}
+
+public Account() {
+accNum = ++count;
+}
+
+
+}
+
+class SavingsAccount extends Account {
+private final double minBalance = 1000;
+double bal;
+
+public void withdraw(double amount) {
+bal = super.getBalance();
+double bal1 = bal - amount;
+if (bal > minBalance && bal1 >= minBalance) {
+
+bal -= amount;
+super.setBalance(bal);
+} else {
+
+System.out.println(" You can withdraw upto  " + (bal - minBalance));
+}
+
+}
+}
+
+class CurrentAccount extends Account {
+public double overdraftLimit = -1000;
+double bal;
+
+public void withdraw(double amount) {
+bal = super.getBalance();
+double bal1 = bal - amount;
+if (bal > overdraftLimit && bal1 >= overdraftLimit) {
+
+bal -= amount;
+super.setBalance(bal);
+System.out.println("false");
+} else {
+
+System.out.println(" You can withdraw upto  " + (bal - overdraftLimit));
+System.out.println("overdraft amount reached");
+}
+
+}
+}
+
+public class Acoounts{
+
+public static void main(String[] args) {
+Person p1 = new Person();
+p1.setName("Smith");
+p1.setAge(21);
+Person p2 = new Person();
+p2.setName("Kathy");
+p2.setAge(21);
+CurrentAccount smithAcc = new CurrentAccount();
+smithAcc.setAccHolder(p1);
+SavingsAccount kathyAcc = new SavingsAccount();
+kathyAcc.setAccHolder(p2);
+smithAcc.setBalance(2000);
+kathyAcc.setBalance(5000);
+smithAcc.deposit(2000);
+System.out.println("The updated smith account balance is " + smithAcc.getBalance());
+System.out.println("The updated kathy account balance is " + kathyAcc.getBalance());
+kathyAcc.withdraw(2000);
+kathyAcc.withdraw(4500);
+ kathyAcc.withdraw();
+smithAcc.withdraw(6000);
+System.out.println(smithAcc.toString());
+System.out.println(kathyAcc.toString());
+
+}
+}
+
+6.3:  Modify the Lab assignment 5.1 to handle exceptions. Create an Exception class named as “EmployeeException”(User defined Exception) in a package named as “com.cg.eis.exception” and throw an exception if salary of an employee is below than 3000. Use Exception Handling mechanism to handle exception properly
+package com.cg.eis.bean;
+
+import com.cg.eis.exception.EmployeeException;
+
+public class Employee {
+	private int id;
+	private String name, designation, insuranceScheme;
+	private double salary;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDesignation() {
+		return designation;
+	}
+
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+
+	public String getInsuranceScheme() {
+		return insuranceScheme;
+	}
+
+	public void setInsuranceScheme(String insuranceScheme) {
+		this.insuranceScheme = insuranceScheme;
+	}
+
+	public double getSalary() {
+		return salary;
+	}
+
+	public void setSalary(double salary) throws EmployeeException {
+		if (salary < 3000) {
+			EmployeeException e1 = new EmployeeException("Salary less than 3000");
+			throw e1;
+		} else {
+			this.salary = salary;
+		}
+	}
+
+}
+package com.cg.eis.exception;
+
+public class EmployeeException extends RuntimeException {
+
+	String message;
+
+	public EmployeeException() {
+			message = "";
+		}
+
+	public EmployeeException(String message) {
+			this.message = message;
+		}
+
+	@Override
+	public String toString() {
+		return "[" + this.getClass().getName() + ":" + message + "]";
+	}
+
+	public String getMessage() {
+		return super.getMessage();
+	}
+
+}
+package com.cg.eis.service;
+
+interface EmployeeService {
+	String insuranceDetails(double salary, String designation);
+}
+
+public class EmployeeInsuranceScheme implements EmployeeService {
+
+	@Override
+	public String insuranceDetails(double salary, String designation) {
+		if(salary>5000 && salary<20000 && designation.equals("System Associate"))
+			return " Scheme C";
+		else if(salary>=20000 && salary<40000 && designation.equals("Programmer"))
+			return "Scheme B";
+		else if(salary>=40000&& designation.equals("Manager"))
+			return "Scheme A";
+		else if(salary<5000 && designation.equals("Clerk"))
+			return "No Scheme";
+		return null;
+	}
+
+}
+package com.cg.eis.pl;
+
+import com.cg.eis.bean.*;
+import com.cg.eis.exception.EmployeeException;
+import com.cg.eis.service.*;
+import java.util.*;
+
+public class UserInput {
+
+public static void main(String[] args) {
+@SuppressWarnings("resource")
+Scanner in = new Scanner(System.in);
+System.out.println("Enter Details of Employee");
+System.out.println("Enter ID Number");
+int id = in.nextInt();
+System.out.println("Enter Name");
+String name = in.next();
+System.out.println("Enter Designation Name (Programmer,System Associate,Manager,Clerk)");
+String designation = in.next();
+System.out.println("Enter salary");
+double salary = in.nextDouble();
+String insuranceScheme;
+
+Employee e = new Employee();
+e.setId(id);
+e.setName(name);
+e.setDesignation(designation);
+// e.setSalary(salary);
+EmployeeInsuranceScheme eis = new EmployeeInsuranceScheme();
+insuranceScheme = eis.insuranceDetails(salary, designation);
+e.setInsuranceScheme(insuranceScheme);
+try {
+e.setSalary(salary);
+System.out.println("Employee id " + e.getId());
+System.out.println("Employee Name " + e.getName());
+System.out.println("Employee designation " + e.getDesignation());
+System.out.println("Employee salary " + e.getSalary());
+System.out.println("Employee insurance scheme " + e.getInsuranceScheme());
+} catch (EmployeeException emp) {
+System.out.println(emp.toString());
+}
+
+ System.out.println("Employee id "+ e.getId());
+ System.out.println("Employee Name "+ e.getName());
+ System.out.println("Employee designation "+ e.getDesignation());
+ System.out.println("Employee salary "+ e.getSalary());
+ System.out.println("Employee insurance scheme "+ e.getInsuranceScheme());
+
+}
+
+public static void checkSalary(double salary) throws EmployeeException {
+if (salary < 3000) {
+EmployeeException e = new EmployeeException("Salary less than 3000");
+throw e;
+}
+}
+}

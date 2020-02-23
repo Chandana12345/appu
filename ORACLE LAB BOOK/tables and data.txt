@@ -1,0 +1,107 @@
+================================================================CREATION OF TABLES====================================================================================
+table 1
+  create table Emp(Empno Number(4) not null,Ename Varchar2(10),job Varchar2(9),mgr Number(4),Hiredate Date,Sal Number(7,2),Comm Number(7,2),Deptno Number(2));
+
+  alter table Emp add primary key(empno);
+
+
+
+table 2
+ create table Designation_Master(Design_code Number(3) not null,Design_name Varchar2(50));
+
+ alter table Designation_Master add primary key(Design_code);
+
+
+table 3
+create table Department_Master(Dept_Code Number(2) not null,Dept_name varchar2(50));
+
+alter table Department_Master add primary key(Dept_Code);
+
+
+table 4
+create table Student_Master(Student_Code Number(6) not null,Student_name Varchar2(50) not null,Dept_Code Number(2),Student_dob Date,Student_Address Varchar2(240));
+alter table Student_Master add primary key(Student_Code);
+alter table Student_Master add foreign key(dept_code) references Department_Master(dept_code);
+
+
+
+Table 5
+create table Student_Marks (Student_Code Number(6),Student_Year	Number Not Null,Subject1 Number(3),Subject2 Number(3),Subject3 Number(3));
+alter table Student_Marks add foreign key(Student_Code) references Student_Master(Student_Code);
+
+Table 6
+create table Staff_Master(Staff_code number(8) not null,Staff_Name varchar2(50),Design_code number, Dept_code number,HireDate Date,Staff_dob Date, Staff_address varchar2(240),Mgr_code number(8),Staff_sal number(10,2));
+
+alter table Staff_Master add primary key(Staff_code);
+
+
+alter table Staff_Master add foreign key(Design_code) references Designation_Master(Design_code);
+
+alter table Staff_Master add foreign key(Dept_code) references Department_Master(Dept_code);
+
+
+Table 7
+create table Book_Master(Book_Code number(10) not null,Book_Name varchar2(50) not null,Book_pub_year number,Book_pub_author varchar2(50) not null );
+alter table Book_Master add primary key(Book_code);
+
+
+Table 8
+create table Book_Transactions(Book_Code Number,Student_Code Number,Staff_code Number,Book_Issue_date Date Not Null,Book_expected_return_date Date Not Null,Book_actual_return_date Date);
+
+
+alter table Book_transactions add foreign key(Book_Code) references Book_Master(Book_Code);
+
+alter table Book_transactions add foreign key(Student_Code) references Student_Master(Student_Code);
+
+==============================================================================INSERTION OF VALUES===========================================================================================================
+
+
+table 1
+insert into Emp values(101,'anil_tt','sales',110,'12-jan-2001',40000,5400,1);
+insert into Emp values(102,'benny','account',131,'12-jan-2004',54000,5000,2);
+insert into Emp values(103,'Dharani','account',131,'14-sep-2003',56000,5000,2);
+insert into Emp values(104,'Ram','product',110,'17-jun-2005',67000,5600,3);
+
+table 2
+
+insert into Designation_Master values(21,'a');
+insert into Designation_Master values(22,'b');
+insert into Designation_Master values(23,'c');
+
+
+table 3
+
+insert into Department_Master values(31,'depta');
+insert into Department_Master values(32,'deptb');
+insert into Department_Master values(33,'deptc');
+
+
+table 4
+insert into Student_Master values(41,'Ram',31,'25-jan-98','hyderabad');
+insert into Student_Master values(42,'Raju',33,'30-jun-95','Chennai');
+insert into Student_Master values(43,'Anna',31,'20-jan-96','vizag');
+insert into Student_Master values(44,'Manju',32,'2-aug-94','Banglore');
+
+table 5
+insert into Student_Marks values(41,6,65,75,85);
+insert into Student_Marks values(42,9,59,70,75);
+insert into Student_Marks values(43,8,85,45,57);
+insert into Student_Marks values(44,10,65,70,58);
+
+
+
+table 6
+insert into Staff_Master values(501,'jj_qq',22,31,'19-jan-91','8-jun-70','banglore','11',19000);
+insert into Staff_Master values(502,'Rakesh_j',21,33,'2-jun-96','15-jul-77','hyderabad','19',74000);
+insert into Staff_Master values(503,'ben_tt',23,32,'6-sep-08','5-feb-90','chennai',null,54000);
+
+
+table 7
+insert into Book_Master values(1,'java',2004,'yash');
+insert into Book_Master values(2,'mysql',2014,'james');
+insert into Book_Master values(4,'c++',2009,'david');
+insert into Book_Master values(3,'c "&" c++',2001,'hari');
+
+table 8
+insert into Book_Transactions values(1,41,501,'20-jan-20','30-jan-20','25-jan-20');
+insert into Book_Transactions values(3,43,502,'2-jul-17','30-jul-17','6-jul-17');

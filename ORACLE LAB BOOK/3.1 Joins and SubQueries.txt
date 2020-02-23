@@ -1,0 +1,632 @@
+1.)
+
+Write a query which displays Staff Name, Department Code, Department Name, 
+and Salary for all staff who earns more than 20000.
+
+A.)
+
+SQL> select s.staff_name as Name,
+  2  s.dept_code as "Department Code",
+  3  d.dept_name as "Department Name",
+  4  s.staff_sal as Salary
+  5  from staff_master s,
+  6  department_master d
+  7  where s.dept_code=d.dept_code
+  8  and s.staff_sal>20000;
+
+NAME                                               Department Code
+-------------------------------------------------- ---------------
+Department Name                                        SALARY
+-------------------------------------------------- ----------
+S                                                               11
+Netwroking                                              67000
+
+G                                                               22
+Production                                              65000
+
+Ash                                                             22
+Production                                              56000
+
+
+NAME                                               Department Code
+-------------------------------------------------- ---------------
+Department Name                                        SALARY
+-------------------------------------------------- ----------
+H                                                               33
+RND                                                     25000
+
+J                                                               44
+Marketing                                               45000
+
+K                                                               55
+Accounting                                              60000
+
+
+NAME                                               Department Code
+-------------------------------------------------- ---------------
+Department Name                                        SALARY
+-------------------------------------------------- ----------
+P                                                               66
+HRM                                                     37000
+
+
+7 rows selected.
+
+2.)
+
+Display Staff Code, Staff Name, Department Name, and his manager’s number and name. 
+Label the columns Staff#, Staff, Mgr#, Manager. 
+
+
+A.)
+
+
+SQL> select s.staff_code as "staff#",
+  2  s.staff_name as staff,
+  3  d.dept_name as "Department Name",
+  4  s.mgr_code as "Mgr#"
+  5  from staff_master s,
+  6  department_master d
+  7  where s.dept_code=d.dept_code;
+
+    staff# STAFF
+---------- --------------------------------------------------
+Department Name                                          Mgr#
+-------------------------------------------------- ----------
+       901 S
+Netwroking                                                145
+
+       902 G
+Production                                                146
+
+       907 Ash
+Production                                                144
+
+
+    staff# STAFF
+---------- --------------------------------------------------
+Department Name                                          Mgr#
+-------------------------------------------------- ----------
+       910 Pasha
+Production
+
+       903 H
+RND                                                       144
+
+       904 J
+Marketing                                                 141
+
+
+    staff# STAFF
+---------- --------------------------------------------------
+Department Name                                          Mgr#
+-------------------------------------------------- ----------
+       911 Pasta
+Marketing
+
+       905 K
+Accounting                                                140
+
+       906 P
+HRM                                                       111
+
+
+9 rows selected.
+
+
+3.)
+
+Create a query that will display Student Code, Student Name, Book Code, and Book Name 
+for all students whose expected book return date is 17-Jun-19.
+
+
+A.)
+
+SQL> select bt.student_code as "Student Code",
+  2  s.student_name as "Student Name",
+  3  bt.book_code as "Book Code",
+  4  b.book_name as "Book Name"
+  5  from Book_Transactions bt,
+  6  Book_master b,Student_Master s
+  7  where s.student_code=bt.student_code
+  8  and b.book_code=bt.book_code
+  9  and bt.Book_expected_return_date='17-Jun-19';
+
+Student Code Student Name                                        Book Code
+------------ -------------------------------------------------- ----------
+Book Name
+--------------------------------------------------
+         201 M                                                         506
+JAVA
+
+
+4.)
+
+Create a query that will display Staff Code, 
+Staff Name, Department Name, Designation name, 
+Book Code, Book Name, and Issue Date for only 
+those staff who have taken any book in last 30 days. . 
+If required, make changes to the table to create such a scenario.
+
+A.)
+
+
+
+SQL> insert into Book_Transactions values
+  2  (506,204,902,'15-Jan-2020','17-Jun-2020','17-Jun-2020');
+
+1 row created.
+
+Commit complete.
+
+SQL> select bt.staff_code as "Staff Code",
+  2  s.staff_name as "Staff Name",
+  3  d.dept_name as "Department Name",
+  4  de.design_name as "Designation Name",
+  5  bt.book_code as "Book Code",
+  6  b.book_name as "Book Name",
+  7  bt.book_issue_date as "Issue Date"
+  8  from Book_Transactions bt,
+  9  Book_master b,Staff_Master s,
+ 10  Department_Master d,Designation_Master de
+ 11  where s.staff_code=bt.staff_code
+ 12  and bt.book_code=b.book_code
+ 13  and s.dept_code=d.dept_code
+ 14  and de.design_code=s.design_code
+ 15  and bt.book_issue_date>SYSDATE-30;
+
+Staff Code Staff Name
+---------- --------------------------------------------------
+Department Name
+--------------------------------------------------
+Designation Name                                    Book Code
+-------------------------------------------------- ----------
+Book Name                                          Issue Dat
+-------------------------------------------------- ---------
+       902 G
+Production
+HR                                                        506
+JAVA                                               15-JAN-20
+
+
+
+5.)
+
+Generate a report which contains the following information.
+Staff Code, Staff Name, Designation Name, 
+Department, Book Code, Book Name,
+Author, Fine For the staff who has not returned the book. 
+Fine will be calculated as Rs. 5 per day. 
+Fine = 5 * (No. of days = Current Date – Expected return date). 
+Include records in the table to suit this problem statement
+
+
+A.)
+
+
+SQL> select bt.staff_code as "Staff Code",
+  2  s.staff_name as "Staff Name",
+  3  de.design_name as "Designation Name",
+  4  d.dept_name as "Department Name",
+  5  bt.book_code as "Book Code",
+  6  b.book_name as "Book Name",
+  7  b.book_pub_author as Author,
+  8  ((SYSDATE-bt.book_actual_return_date)*5) as Fine
+  9  from Book_Transactions bt,
+ 10  Book_master b,Staff_Master s,
+ 11  Department_Master d,Designation_Master de
+ 12  where s.staff_code=bt.staff_code
+ 13  and bt.book_code=b.book_code
+ 14  and s.dept_code=d.dept_code
+ 15  and de.design_code=s.design_code;
+
+Staff Code Staff Name
+---------- --------------------------------------------------
+Designation Name
+--------------------------------------------------
+Department Name                                     Book Code
+-------------------------------------------------- ----------
+Book Name
+--------------------------------------------------
+AUTHOR                                                   FINE
+-------------------------------------------------- ----------
+       901 S
+IT
+Netwroking                                                503
+
+Staff Code Staff Name
+---------- --------------------------------------------------
+Designation Name
+--------------------------------------------------
+Department Name                                     Book Code
+-------------------------------------------------- ----------
+Book Name
+--------------------------------------------------
+AUTHOR                                                   FINE
+-------------------------------------------------- ----------
+DBMS
+Ashton                                             1098.17645
+
+
+Staff Code Staff Name
+---------- --------------------------------------------------
+Designation Name
+--------------------------------------------------
+Department Name                                     Book Code
+-------------------------------------------------- ----------
+Book Name
+--------------------------------------------------
+AUTHOR                                                   FINE
+-------------------------------------------------- ----------
+       901 S
+IT
+Netwroking                                                505
+
+Staff Code Staff Name
+---------- --------------------------------------------------
+Designation Name
+--------------------------------------------------
+Department Name                                     Book Code
+-------------------------------------------------- ----------
+Book Name
+--------------------------------------------------
+AUTHOR                                                   FINE
+-------------------------------------------------- ----------
+CC
+Susha                                              38.1764468
+
+
+Staff Code Staff Name
+---------- --------------------------------------------------
+Designation Name
+--------------------------------------------------
+Department Name                                     Book Code
+-------------------------------------------------- ----------
+Book Name
+--------------------------------------------------
+AUTHOR                                                   FINE
+-------------------------------------------------- ----------
+       902 G
+HR
+Production                                                506
+
+Staff Code Staff Name
+---------- --------------------------------------------------
+Designation Name
+--------------------------------------------------
+Department Name                                     Book Code
+-------------------------------------------------- ----------
+Book Name
+--------------------------------------------------
+AUTHOR                                                   FINE
+-------------------------------------------------- ----------
+JAVA
+Roxi                                               1108.17645
+
+
+Staff Code Staff Name
+---------- --------------------------------------------------
+Designation Name
+--------------------------------------------------
+Department Name                                     Book Code
+-------------------------------------------------- ----------
+Book Name
+--------------------------------------------------
+AUTHOR                                                   FINE
+-------------------------------------------------- ----------
+       903 H
+TR
+RND                                                       504
+
+Staff Code Staff Name
+---------- --------------------------------------------------
+Designation Name
+--------------------------------------------------
+Department Name                                     Book Code
+-------------------------------------------------- ----------
+Book Name
+--------------------------------------------------
+AUTHOR                                                   FINE
+-------------------------------------------------- ----------
+CN
+Amla                                               -566.82355
+
+
+Staff Code Staff Name
+---------- --------------------------------------------------
+Designation Name
+--------------------------------------------------
+Department Name                                     Book Code
+-------------------------------------------------- ----------
+Book Name
+--------------------------------------------------
+AUTHOR                                                   FINE
+-------------------------------------------------- ----------
+       904 J
+Developer
+Marketing                                                 501
+
+Staff Code Staff Name
+---------- --------------------------------------------------
+Designation Name
+--------------------------------------------------
+Department Name                                     Book Code
+-------------------------------------------------- ----------
+Book Name
+--------------------------------------------------
+AUTHOR                                                   FINE
+-------------------------------------------------- ----------
+Let us C
+BalaguruSwamy                                      438.176447
+
+
+Staff Code Staff Name
+---------- --------------------------------------------------
+Designation Name
+--------------------------------------------------
+Department Name                                     Book Code
+-------------------------------------------------- ----------
+Book Name
+--------------------------------------------------
+AUTHOR                                                   FINE
+-------------------------------------------------- ----------
+       906 P
+Developer
+HRM                                                       502
+
+Staff Code Staff Name
+---------- --------------------------------------------------
+Designation Name
+--------------------------------------------------
+Department Name                                     Book Code
+-------------------------------------------------- ----------
+Book Name
+--------------------------------------------------
+AUTHOR                                                   FINE
+-------------------------------------------------- ----------
+CO
+Egar                                               488.176447
+
+
+6 rows selected.
+
+
+6.)
+
+List Staff Code, Staff Name, and Salary 
+for those who are getting greater than the 
+average salary of organization.
+
+A.)
+
+SQL> select staff_code as "Staff Code",
+  2  staff_name as "Staff Name",
+  3  Staff_sal as Salary
+  4  from Staff_Master s
+  5  where s.staff_sal>(select avg(staff_sal) from staff_master);
+
+Staff Code Staff Name                                             SALARY
+---------- -------------------------------------------------- ----------
+       901 S                                                       67000
+       902 G                                                       65000
+       904 J                                                       45000
+       905 K                                                       60000
+       907 Ash                                                     56000
+
+7.)
+
+Display Author Name, Book Name for those authors who wrote more than one book.
+
+A.)
+
+
+SQL> select book_pub_author as "Author Name",
+  2  book_name as "Book Name"
+  3  from Book_Master b
+  4  where book_pub_author in
+  5  (select book_pub_author
+  6  from Book_Master
+  7  group by book_pub_author having
+  8  count(distinct book_name)>1);
+
+Author Name
+--------------------------------------------------
+Book Name
+--------------------------------------------------
+Amla
+CN
+
+Amla
+CC
+
+
+8.)
+
+Display Staff Code, Staff Name, and Department Name for those who have taken more than one book.
+
+A.)
+
+
+
+SQL> select distinct s.staff_code as "Staff Code",
+  2  s.staff_name as "Name",
+  3  d.dept_name as "Department Name"
+  4  from staff_master s,department_master d
+  5  where s.dept_code=d.dept_code and
+  6  s.staff_code in(select staff_code from book_transactions
+  7  group by staff_code having count( book_code)>1);
+
+Staff Code Name
+---------- --------------------------------------------------
+Department Name
+--------------------------------------------------
+       902 G
+Production
+
+       901 S
+Netwroking
+ 
+
+9.)
+
+Display the Student Code, Student Name, and Department Name 
+for that department in which there are maximum number of student studying.
+
+A.)
+
+
+SQL> create table students_count
+  2  as select dept_code,count(*)
+  3  as "Number of Students"
+  4  from staff_master
+  5  group by dept_code
+  6  order by count(*) desc
+  7  fetch first row with ties;
+
+Table created.
+
+SQL> select * from students_count;
+
+ DEPT_CODE Number of Students
+---------- ------------------
+        22                  3
+
+SQL> select s.student_code,s.student_name,
+  2  d.dept_name from student_master s,
+  3  department_master d,students_count sc
+  4  where d.dept_code=s.dept_code
+  5  and d.dept_code=sc.dept_code;
+
+STUDENT_CODE STUDENT_NAME
+------------ --------------------------------------------------
+DEPT_NAME
+--------------------------------------------------
+         202 N
+Production
+
+         208 VJ
+Production
+
+10.)
+
+Display Staff Code, Staff Name, Department Name, 
+and Designation name for those who have joined in last 3 months.
+
+A.)
+
+SQL> select s.staff_code as "Staff Code",
+  2  s.staff_name as "Staff Name",
+  3  d.dept_name as "Department Name",
+  4  de.design_name as "Designation Name",
+  5  s.hiredate as "HireDate"
+  6  from staff_master s,department_master d,
+  7  designation_master de where
+  8  s.dept_code=d.dept_code
+  9  and s.design_code=de.design_code
+ 10  and s.hiredate>sysdate-90;
+
+Staff Code Staff Name
+---------- --------------------------------------------------
+Department Name
+--------------------------------------------------
+Designation Name                                   HireDate
+-------------------------------------------------- ---------
+       902 G
+Production
+HR                                                 02-MAR-20
+
+       907 Ash
+Production
+HR                                                 11-JAN-20
+
+
+11.)
+
+Display the Manager Name and the total strength of his/her team.
+
+A.)
+
+
+SQL> select mgr_code as "Manager Code",
+  2  count(staff_code) as "Strength"
+  3  from staff_master
+  4  group by mgr_code
+  5  order by count(staff_code) desc;
+
+Manager Code   Strength
+------------ ----------
+         144          3
+         146          2
+         111          1
+         141          1
+         145          1
+         140          1
+
+6 rows selected.
+
+12.)
+
+Display the details of books that have not been returned and expected 
+return date was last Monday. Book name should be displayed in proper case.. 
+Hint: You can change /add records so that the expected return date  suits this 
+problem statement
+
+A.)
+
+
+SQL> select * from book_transactions
+  2  where book_actual_return_date is null and
+  3  book_expected_return_date=
+  4  (select to_char(next_day(sysdate-7,'monday'),'dd-MON-yyyy') from dual);
+
+ BOOK_CODE STUDENT_CODE STAFF_CODE BOOK_ISSU BOOK_EXPE BOOK_ACTU
+---------- ------------ ---------- --------- --------- ---------
+       504          205        903 15-JAN-20 27-JAN-20
+
+
+13.)
+
+Write a query to display number of people in each Department. 
+Output should display Department Code, Department Name and Number of People.
+
+A.)
+
+
+SQL> select s.dept_code as "Department Code",
+  2  d.dept_name as "Department Name",
+  3  count(s.staff_code) as "Number of People"
+  4  from staff_master s,department_master d
+  5  where s.dept_code=d.dept_code
+  6  group by s.dept_code,d.dept_name;
+
+Department Code Department Name
+--------------- --------------------------------------------------
+Number of People
+----------------
+             11 Netwroking
+               1
+
+             22 Production
+               3
+
+             33 RND
+               1
+
+
+Department Code Department Name
+--------------- --------------------------------------------------
+Number of People
+----------------
+             44 Marketing
+               2
+
+             55 Accounting
+               1
+
+             66 HRM
+               1
+
+
+6 rows selected.
+
+

@@ -1,0 +1,819 @@
+SQL> insert into Emp Values
+  2  (
+  3  1,
+  4  'A',
+  5  'IT',
+  6  101,
+  7  '29-Apr-2008',
+  8  50000,
+  9  1457,
+ 10  15
+ 11  );
+
+1 row created.
+
+Commit complete.
+
+SQL> insert into Emp Values
+  2  (
+  3  2,
+  4  'B',
+  5  'HR',
+  6  102,
+  7  '02-Mar-1998',
+  8  90000,
+  9  1458,
+ 10  16
+ 11  );
+
+1 row created.
+
+Commit complete.
+
+SQL> insert into Emp Values
+  2  (
+  3  3,
+  4  'C',
+  5  'HR',
+  6  103,
+  7  '17-Feb-2000',
+  8  80000,
+  9  1459,
+ 10  16
+ 11  );
+
+1 row created.
+
+Commit complete.
+
+SQL> insert into Emp Values
+  2  (
+  3  4,
+  4  'F',
+  5  'TR',
+  6  104,
+  7  '20-Sep-2007',
+  8  20000,
+  9  1460,
+ 10  17
+ 11  );
+
+1 row created.
+
+Commit complete.
+
+SQL> insert into Emp Values
+  2  (
+  3  6,
+  4  'E',
+  5  'Developer',
+  6  106,
+  7  '25-Dec-2004',
+  8  25000,
+  9  1461,
+ 10  18
+ 11  );
+
+1 row created.
+
+Commit complete.
+
+
+SQL> select * from Emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+         5 D          TR               105 31-MAY-02      50000       1460
+        17
+
+         6 E          Developer        106 25-DEC-04      25000       1461
+        18
+
+         4 F          TR               104 20-SEP-07      20000       1460
+        17
+
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+         3 C          HR               103 17-FEB-00      80000       1459
+        16
+
+         2 B          HR               102 02-MAR-98      90000       1458
+        16
+
+         1 A          IT               101 29-APR-08      50000       1457
+        15
+
+
+6 rows selected.
+
+
+SQL> insert into Designation_Master values
+  2  (
+  3  123,
+  4  'IT'
+  5  );
+
+1 row created.
+
+Commit complete.
+SQL> insert into Designation_Master values
+  2  (
+  3  124,
+  4  'HR'
+  5  );
+
+1 row created.
+
+Commit complete.
+SQL> insert into Designation_Master values
+  2  (
+  3  125,
+  4  'TR'
+  5  );
+
+1 row created.
+
+Commit complete.
+SQL> insert into Designation_Master values
+  2  (
+  3  126,
+  4  'Developer'
+  5  );
+
+1 row created.
+
+Commit complete.
+SQL> select * from Designation_Master;
+
+DESIGN_CODE DESIGN_NAME
+----------- --------------------------------------------------
+        123 IT
+        124 HR
+        125 TR
+        126 Developer
+
+SQL> insert into Department_Master values
+  2  (
+  3  11,
+  4  'Netwroking'
+  5  );
+
+1 row created.
+
+Commit complete.
+SQL> insert into Department_Master values
+  2  (
+  3  22,
+  4  'Production'
+  5  );
+
+1 row created.
+
+Commit complete.
+SQL> insert into Department_Master values
+  2  (
+  3  33,
+  4  'RND'
+  5  );
+
+1 row created.
+
+Commit complete.
+SQL> insert into Department_Master values
+  2  (
+  3  44,
+  4  'Marketing'
+  5  );
+
+1 row created.
+
+Commit complete.
+SQL> insert into Department_Master values
+  2  (
+  3  55,
+  4  'Accounting'
+  5  );
+
+1 row created.
+
+Commit complete.
+SQL> insert into Department_Master values
+  2  (
+  3  66,
+  4  'HRM'
+  5  );
+
+1 row created.
+
+Commit complete.
+SQL> select * from Department_Master;
+
+ DEPT_CODE DEPT_NAME
+---------- --------------------------------------------------
+        11 Netwroking
+        22 Production
+        33 RND
+        44 Marketing
+        55 Accounting
+        66 HRM
+
+6 rows selected.
+
+
+SQL> insert into Student_Master values
+  2  (
+  3  201,
+  4  'M',
+  5  11,
+  6  '25-Dec-1998',
+  7  '3-24/7,Bandlaguda'
+  8  );
+
+1 row created.
+
+Commit complete.
+SQL> insert into Student_Master values
+  2  (
+  3  202,
+  4  'N',
+  5  22,
+  6  '20-Sep-2002',
+  7  '37-56/2,Uppal'
+  8  );
+
+1 row created.
+
+Commit complete.
+SQL> insert into Student_Master values
+  2  (
+  3  203,
+  4  'V',
+  5  44,
+  6  '31-May-1998',
+  7  '29/4,Suncity'
+  8  );
+
+1 row created.
+
+Commit complete.
+SQL> insert into Student_Master values
+  2  (
+  3  204,
+  4  'X',
+  5  33,
+  6  '17-Feb-2000',
+  7  '345/21,Kukatpally'
+  8  );
+
+1 row created.
+
+Commit complete.
+SQL> insert into Student_Master values
+  2  (
+  3  205,
+  4  'Z',
+  5  66,
+  6  '02-Mar-2000',
+  7  '344/12,Kothapet'
+  8  );
+
+1 row created.
+
+Commit complete.
+SQL> insert into Student_Master values
+  2  (
+  3  206,
+  4  'L',
+  5  66,
+  6  '29-Apr-2006',
+  7  '67/12,Begumpet'
+  8  );
+
+1 row created.
+
+Commit complete.
+SQL> select * from Student_Master;
+
+STUDENT_CODE STUDENT_NAME                                        DEPT_CODE
+------------ -------------------------------------------------- ----------
+STUDENT_D
+---------
+STUDENT_ADDRESS
+--------------------------------------------------------------------------------
+         201 M                                                          11
+25-DEC-98
+3-24/7,Bandlaguda
+
+         202 N                                                          22
+20-SEP-02
+37-56/2,Uppal
+
+STUDENT_CODE STUDENT_NAME                                        DEPT_CODE
+------------ -------------------------------------------------- ----------
+STUDENT_D
+---------
+STUDENT_ADDRESS
+--------------------------------------------------------------------------------
+
+         203 V                                                          44
+31-MAY-98
+29/4,Suncity
+
+         204 X                                                          33
+17-FEB-00
+
+STUDENT_CODE STUDENT_NAME                                        DEPT_CODE
+------------ -------------------------------------------------- ----------
+STUDENT_D
+---------
+STUDENT_ADDRESS
+--------------------------------------------------------------------------------
+345/21,Kukatpally
+
+         205 Z                                                          66
+02-MAR-00
+344/12,Kothapet
+
+         206 L                                                          66
+
+STUDENT_CODE STUDENT_NAME                                        DEPT_CODE
+------------ -------------------------------------------------- ----------
+STUDENT_D
+---------
+STUDENT_ADDRESS
+--------------------------------------------------------------------------------
+29-APR-06
+67/12,Begumpet
+
+
+6 rows selected.
+
+
+SQL> insert into Student_Marks values
+  2  (
+  3  201,
+  4  4,
+  5  96,
+  6  97,
+  7  67
+  8  );
+
+1 row created.
+
+SQL> insert into Student_Marks values
+  2  (
+  3  202,
+  4  3,
+  5  56,
+  6  67,
+  7  77
+  8  );
+
+1 row created.
+
+SQL> insert into Student_Marks values
+  2  (
+  3  203,
+  4  3,
+  5  86,
+  6  27,
+  7  47
+  8  );
+
+1 row created.
+
+SQL> insert into Student_Marks values
+  2  (
+  3  204,
+  4  2,
+  5  77,
+  6  62,
+  7  65
+  8  );
+
+1 row created.
+
+SQL> insert into Student_Marks values
+  2  (
+  3  205,
+  4  1,
+  5  77,
+  6  62,
+  7  55
+  8  );
+
+1 row created.
+
+SQL> insert into Student_Marks values
+  2  (
+  3  206,
+  4  4,
+  5  97,
+  6  82,
+  7  85
+  8  );
+
+1 row created.
+
+SQL> select * from Student_Marks
+  2  ;
+
+STUDENT_CODE STUDENT_YEAR   SUBJECT1   SUBJECT2   SUBJECT3
+------------ ------------ ---------- ---------- ----------
+         201            4         96         97         67
+         202            3         56         67         77
+         203            3         86         27         47
+         204            2         77         62         65
+         205            1         77         62         55
+         206            4         97         82         85
+
+6 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> Set AUTOCOMMIT ON;
+
+
+SQL> insert into Staff_Master values
+  2  (
+  3  901,
+  4  'S',
+  5  123,
+  6  11,
+  7  '31-May-2018',
+  8  '31-May-1998',
+  9  '145/72,Hyd',
+ 10  145,
+ 11  67000
+ 12  );
+
+1 row created.
+
+Commit complete.
+SQL> insert into Staff_Master values
+  2  (
+  3  902,
+  4  'G',
+  5  124,
+  6  22,
+  7  '02-Mar-2020',
+  8  '02-Mar-1999',
+  9  '143/71,Kothapet',
+ 10  146,
+ 11  65000
+ 12  );
+
+1 row created.
+
+Commit complete.
+SQL> insert into Staff_Master values
+  2  (
+  3  903,
+  4  'H',
+  5  125,
+  6  33,
+  7  '20-Sep-2006',
+  8  '02-Mar-1987',
+  9  '149/70,Uppal',
+ 10  144,
+ 11  25000
+ 12  );
+
+1 row created.
+
+Commit complete.
+SQL> insert into Staff_Master values
+  2  (
+  3  904,
+  4  'J',
+  5  126,
+  6  44,
+  7  '25-Dec-2006',
+  8  '20-Sep-1987',
+  9  '149/76,Bandlaguda',
+ 10  141,
+ 11  45000
+ 12  );
+
+1 row created.
+
+Commit complete.
+SQL> insert into Staff_Master values
+  2  (
+  3  905,
+  4  'K',
+  5  124,
+  6  55,
+  7  '29-Apr-2007',
+  8  '25-Sep-1990',
+  9  '144/76,Begumpet',
+ 10  140,
+ 11  60000
+ 12  );
+
+1 row created.
+
+Commit complete.
+SQL> insert into Staff_Master values
+  2  (
+  3  906,
+  4  'P',
+  5  126,
+  6  66,
+  7  '17-Feb-2008',
+  8  '13-Aug-1987',
+  9  '141/75,KPHB',
+ 10  111,
+ 11  37000
+ 12  );
+
+1 row created.
+
+Commit complete.
+SQL> select * from Staff_Master;
+
+STAFF_CODE STAFF_NAME                                         DESIGN_CODE
+---------- -------------------------------------------------- -----------
+ DEPT_CODE HIREDATE  STAFF_DOB
+---------- --------- ---------
+STAFF_ADDRESS
+--------------------------------------------------------------------------------
+  MGR_CODE  STAFF_SAL
+---------- ----------
+       901 S                                                          123
+        11 31-MAY-18 31-MAY-98
+145/72,Hyd
+       145      67000
+
+
+STAFF_CODE STAFF_NAME                                         DESIGN_CODE
+---------- -------------------------------------------------- -----------
+ DEPT_CODE HIREDATE  STAFF_DOB
+---------- --------- ---------
+STAFF_ADDRESS
+--------------------------------------------------------------------------------
+  MGR_CODE  STAFF_SAL
+---------- ----------
+       902 G                                                          124
+        22 02-MAR-20 02-MAR-99
+143/71,Kothapet
+       146      65000
+
+
+STAFF_CODE STAFF_NAME                                         DESIGN_CODE
+---------- -------------------------------------------------- -----------
+ DEPT_CODE HIREDATE  STAFF_DOB
+---------- --------- ---------
+STAFF_ADDRESS
+--------------------------------------------------------------------------------
+  MGR_CODE  STAFF_SAL
+---------- ----------
+       903 H                                                          125
+        33 20-SEP-06 02-MAR-87
+149/70,Uppal
+       144      25000
+
+
+STAFF_CODE STAFF_NAME                                         DESIGN_CODE
+---------- -------------------------------------------------- -----------
+ DEPT_CODE HIREDATE  STAFF_DOB
+---------- --------- ---------
+STAFF_ADDRESS
+--------------------------------------------------------------------------------
+  MGR_CODE  STAFF_SAL
+---------- ----------
+       904 J                                                          126
+        44 25-DEC-06 20-SEP-87
+149/76,Bandlaguda
+       141      45000
+
+
+STAFF_CODE STAFF_NAME                                         DESIGN_CODE
+---------- -------------------------------------------------- -----------
+ DEPT_CODE HIREDATE  STAFF_DOB
+---------- --------- ---------
+STAFF_ADDRESS
+--------------------------------------------------------------------------------
+  MGR_CODE  STAFF_SAL
+---------- ----------
+       905 K                                                          124
+        55 29-APR-07 25-SEP-90
+144/76,Begumpet
+       140      60000
+
+
+STAFF_CODE STAFF_NAME                                         DESIGN_CODE
+---------- -------------------------------------------------- -----------
+ DEPT_CODE HIREDATE  STAFF_DOB
+---------- --------- ---------
+STAFF_ADDRESS
+--------------------------------------------------------------------------------
+  MGR_CODE  STAFF_SAL
+---------- ----------
+       906 P                                                          126
+        66 17-FEB-08 13-AUG-87
+141/75,KPHB
+       111      37000
+
+
+6 rows selected.
+
+
+SQL> insert into Book_Master values
+  2  (
+  3  501,
+  4  'Let us C',
+  5  1956,
+  6  'BalaguruSwamy'
+  7  );
+
+1 row created.
+
+Commit complete.
+SQL> insert into Book_Master values
+  2  (
+  3  502,
+  4  'CO',
+  5  1966,
+  6  'Egar'
+  7  );
+
+1 row created.
+
+Commit complete.
+SQL> insert into Book_Master values
+  2  (
+  3  503,
+  4  'DBMS',
+  5  1978,
+  6  'Ashton'
+  7  );
+
+1 row created.
+
+Commit complete.
+SQL> insert into Book_Master values
+  2  (
+  3  504,
+  4  'CN',
+  5  1923,
+  6  'Amla'
+  7  );
+
+1 row created.
+
+Commit complete.
+SQL> insert into Book_Master values
+  2  (
+  3  505,
+  4  'CC',
+  5  1920,
+  6  'Susha'
+  7  );
+
+1 row created.
+
+Commit complete.
+SQL> insert into Book_Master values
+  2  (
+  3  506,
+  4  'JAVA',
+  5  1921,
+  6  'Roxi'
+  7  );
+
+1 row created.
+
+Commit complete.
+SQL> select * from Book_Master;
+
+ BOOK_CODE BOOK_NAME                                          BOOK_PUB_YEAR
+---------- -------------------------------------------------- -------------
+BOOK_PUB_AUTHOR
+--------------------------------------------------
+       501 Let us C                                                    1956
+BalaguruSwamy
+
+       502 CO                                                          1966
+Egar
+
+       503 DBMS                                                        1978
+Ashton
+
+
+ BOOK_CODE BOOK_NAME                                          BOOK_PUB_YEAR
+---------- -------------------------------------------------- -------------
+BOOK_PUB_AUTHOR
+--------------------------------------------------
+       504 CN                                                          1923
+Amla
+
+       505 CC                                                          1920
+Susha
+
+       506 JAVA                                                        1921
+Roxi
+
+
+6 rows selected.
+
+
+
+SQL> insert into Book_Transactions values
+  2  (
+  3  506,
+  4  201,
+  5  902,
+  6  '31-May-2019',
+  7  '17-Jun-2019',
+  8  '17-Jun-2019'
+  9  );
+
+1 row created.
+
+Commit complete.
+SQL> insert into Book_Transactions values
+  2  (
+  3  505,
+  4  202,
+  5  901,
+  6  '25-Dec-2019',
+  7  '17-Jan-2020',
+  8  '17-Jan-2020'
+  9  );
+
+1 row created.
+
+Commit complete.
+SQL> insert into Book_Transactions values
+  2  (
+  3  504,
+  4  206,
+  5  903,
+  6  '29-Apr-2019',
+  7  '17-May-2020',
+  8  '17-May-2020'
+  9  );
+
+1 row created.
+
+Commit complete.
+SQL> insert into Book_Transactions values
+  2  (
+  3  503,
+  4  203,
+  5  901,
+  6  '25-May-2019',
+  7  '19-Jun-2019',
+  8  '19-Jun-2019'
+  9  );
+
+1 row created.
+
+Commit complete.
+SQL> insert into Book_Transactions values
+  2  (
+  3  502,
+  4  202,
+  5  906,
+  6  '15-Sep-2019',
+  7  '19-Oct-2019',
+  8  '19-Oct-2019'
+  9  );
+
+1 row created.
+
+Commit complete.
+SQL> insert into Book_Transactions values
+  2  (
+  3  501,
+  4  205,
+  5  904,
+  6  '25-Sep-2019',
+  7  '29-Oct-2019',
+  8  '29-Oct-2019'
+  9  );
+
+1 row created.
+
+Commit complete.
+SQL> select * from Book_Transactions;
+
+ BOOK_CODE STUDENT_CODE STAFF_CODE BOOK_ISSU BOOK_EXPE BOOK_ACTU
+---------- ------------ ---------- --------- --------- ---------
+       506          201        902 31-MAY-19 17-JUN-19 17-JUN-19
+       505          202        901 25-DEC-19 17-JAN-20 17-JAN-20
+       504          206        903 29-APR-19 17-MAY-20 17-MAY-20
+       503          203        901 25-MAY-19 19-JUN-19 19-JUN-19
+       502          202        906 15-SEP-19 19-OCT-19 19-OCT-19
+       501          205        904 25-SEP-19 29-OCT-19 29-OCT-19
+
+6 rows selected.
+

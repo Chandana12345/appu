@@ -1,0 +1,406 @@
+﻿3.1: Create a method which can perform a particular String operation based on the user’s choice. The method should accept the String object and the user’s choice and return the output of the operation. Options are  Add the String to itself  Replace odd positions with #  Remove duplicate characters in the String  Change odd characters to upper case
+package lab;
+import java.util.*;
+public class userchoice1 {
+		
+		Scanner s =new Scanner(System.in);
+		
+		String name=s.nextLine();	
+		int N=name.length();
+		char array[]= new char[N];
+		char array1[]=new char[N];
+		char array2[]=new char[N];
+		int i,j;
+		
+		void display()
+		{
+			System.out.println("1.Add to String itself");
+			System.out.println("2.Replace odd positions with # ");
+			System.out.println("3.Remove duplicate characters in the String ");
+			System.out.println("4.Change odd characters to upper case ");
+			int q=s.nextInt();
+		switch(q)
+		{
+			case 1: 
+			
+						String concatedstring=name+name;
+						System.out.println("concatedstring="+concatedstring);
+						break;
+					
+			case 2: 
+						for(int z=0,j=1,i=0;z<N;z++)
+						{
+							while(i<N)
+							{
+									array[i]='#';
+									i=i+2;
+									break;
+							}
+							while(j<N)
+							{
+								array[j]=name.charAt(j);
+								j=j+2;
+								break;
+							}		
+						}
+						for(int k=0;k<N;k++)
+						{
+							System.out.print(array[k]);
+			
+						}		
+						break;
+
+			case 3: 
+						int m=1;
+						array1[0]=name.charAt(0);
+						for(i=1;i<N;i++)
+						{
+							j=0;
+							int count=0;
+							while(j<i)
+							{
+								if(name.charAt(i)!=name.charAt(j))
+								{
+									count++;		
+								}
+								j++;
+							}
+							if(count==i)
+							{
+								array1[m]=name.charAt(i);
+								m++;
+							}
+						}
+						for(int k=0;k<N;k++)
+						{
+							System.out.print(array1[k]);
+			
+						}	
+			
+						break;
+			case 4: 
+						for(i=0;i<N;i++)
+						{
+							if(i%2==0)
+							{
+								array2[i]=(char)(name.charAt(i)-32);
+							}
+							else
+							{
+								array2[i]=name.charAt(i);
+							}
+						}
+						for(int k=0;k<N;k++)
+						{
+							System.out.print(array2[k]);
+				
+						}	
+						break;
+			default :System.out.println("enter correct number------ ");
+			break;
+		}
+		
+		}
+		
+			
+
+		public static void main(String[] args) {
+			
+			System.out.println("enter the string");
+			userchoice1 obj=new userchoice1();
+			obj.display();
+		}
+
+	}
+
+3.2: Create a method that accepts a String and checks if it is a positive string. A string is considered a positive string, if on moving from left to right each character in the String comes after the previous characters in the Alphabetical order.For Example: ANT is a positive String (Since T comes after N and N comes after A). The method should return true if the entered string is positive
+package lab;
+import java.util.Arrays;
+import java.util.Scanner;
+	public class Check {
+	static boolean AlphabeticalOrder(String s) {
+		
+			int l=s.length();
+			char ch[]=new char[l];
+			for(int i=0;i<l;i++) {
+				ch[i]=s.charAt(i);
+			}
+			Arrays.sort(ch) ; 
+			for(int i=0;i<l;i++)                                                          
+				if(ch[i]!=s.charAt(i))
+					return false;
+				
+					return true;		
+	 }
+		public static void main(String[] args) {
+			// TODO Auto-generated method 
+			Scanner sc=new Scanner(System.in);
+			System.out.println("enter a string");
+			String s=sc.next();
+			if(AlphabeticalOrder(s))
+				System.out.println("true");
+			else
+				System.out.println("false");
+				sc.close();
+			
+			
+		}
+
+	}
+
+
+3.3: Create a method to accept date and print the duration in days, months and years with regards to current system date
+package lab;
+
+import java.time.*;
+public class DateDuration {
+		
+	         public void duration()
+	         {
+	        	 LocalDate pdate = LocalDate.of(2014,12,11);
+	 	        LocalDate now = LocalDate.now();
+	 	 
+	 	        Period dur = Period.between(pdate, now);
+	 	       System.out.printf("\nDuration is %d years, %d months and %d days old\n\n",dur.getYears(), dur.getMonths(), dur.getDays());
+	 }
+	           public static void main(String[] args)
+		    {
+		        DateDuration d = new DateDuration();
+		        d.duration();
+		     
+		     
+		    }
+	}
+
+
+3.4: Revise exercise 3.3 to accept two LocalDates and print the duration between dates in days, months and years
+package lab;
+import java.util.*;
+import java.time.*;
+public class differdate {
+	public static void main(String[] args)
+    {
+        LocalDate pdate = LocalDate.of(2012, 01, 01);
+        LocalDate now = LocalDate.now();
+ 
+        Period diff = Period.between(pdate, now);
+ 
+     System.out.printf("\nDifference is %d years, %d months and %d days old\n\n", 
+                    diff.getYears(), diff.getMonths(), diff.getDays());
+  }
+}
+3.5: Create a method to accept product purchase date and warrantee period (in terms of months and years). Print the date on which warrantee of product expires. 
+package lab;
+
+import java.text.DateFormat;
+
+import java.text.SimpleDateFormat;
+
+import java.time.LocalDate;
+
+import java.time.Period;
+
+import java.time.format.DateTimeFormatter;
+
+import java.util.Scanner;
+
+ 
+
+public class date {
+
+ 
+
+              public static void main(String[] args) {
+
+                           // TODO Auto-generated method stub
+
+                           System.out.println("ENTER DATE IN FORMAT YYYY,MM,DD");
+
+                           Scanner sc=new Scanner(System.in);
+
+                           int year =sc.nextInt();
+
+                           int month =sc.nextInt();
+
+                           int dayOfMonth =sc.nextInt();
+
+                           LocalDate loc=LocalDate.of(year, month, dayOfMonth);
+
+                           System.out.println("enter expiry in format YY,MM");
+
+                           int year1 =sc.nextInt();
+
+                           int month1 =sc.nextInt();
+
+                           LocalDate l=loc.plusYears(year1);
+
+                           LocalDate l1=loc.plusMonths(month1);
+
+                           //LocalDate lll=LocalDate.of(year1, month1, dayOfMonth);
+
+              /*          System.out.println("enter other date");
+
+                           int year1 =sc.nextInt();
+
+                           int month1 =sc.nextInt();
+
+                           int dayOfMonth1 =sc.nextInt();
+
+                           LocalDate l=LocalDate.of(year1, month1, dayOfMonth1);
+
+                           Period p=Period.between(loc, l);
+
+                           System.out.println(l);
+
+                           System.out.println("The difference of years"+p.getYears()+",months"+p.getMonths()+"days"+p.getDays());
+
+                           */
+
+int m=l.getMonthValue();
+
+int n=l.getYear();
+
+switch(m){
+
+case 2:
+
+              if(loc.getDayOfMonth()==29||loc.getDayOfMonth()==30||loc.getDayOfMonth()==31){
+
+                           dayOfMonth=1;
+
+                           m=3;
+
+              }
+
+              break;
+
+case 4:
+
+              if(loc.getDayOfMonth()==31){
+
+                           dayOfMonth=1;
+
+                           m=5;
+
+              }
+
+              break;
+
+case 6:
+
+              if(loc.getDayOfMonth()==31){
+
+                           dayOfMonth=1;
+
+                           m=7;
+
+              }
+
+              break;
+
+case 9:
+
+              if(loc.getDayOfMonth()==31){
+
+                           dayOfMonth=1;
+
+                           m=10;
+
+              }
+
+              break;
+
+case 11:
+
+              if(loc.getDayOfMonth()==31){
+
+                           dayOfMonth=1;
+
+                           m=12;
+
+              }
+
+              break;
+
+}
+
+LocalDate loc1=LocalDate.of(n, m, dayOfMonth);
+
+System.out.println(loc1);
+
+              }
+
+ }
+
+
+
+3.6: Create a method which accept zone id and print the current date and time with respect to given zone. (Hint: Few zones to test your code. America/New_York, Europe/London, Asia/Tokyo, US/Pacific, Africa/Cairo, Australia/Sydney etc.) 
+ import java.time.LocalDateTime;
+
+import java.time.ZoneId;
+
+import java.util.Scanner;
+
+ 
+
+public class ZonalTimes {
+
+ 
+
+              public static void main(String[] args) {
+
+                           // TODO Auto-generated method stub
+
+                           System.out.println("Enter zone id in terms of Conteinent/Place");
+
+Scanner sc=new Scanner(System.in);
+
+String s=sc.next();
+
+ 
+
+zoneid(s);
+
+              }
+
+              public static void zoneid(String s){
+
+                           LocalDateTime l=LocalDateTime.now(ZoneId.of(s));
+
+                           System.out.println(l);
+
+              }
+
+ 
+
+}
+
+
+3.7: Modify Lab assignment 2.3 to perform following functionalities: a) Add a method called calculateAge which should accept person’s date of birth and calculate age of a person.  b) Add a method called getFullName(String firstName, String lastName) which should return full name of a person  Display person details with age and fullname. 
+ package lab;
+
+	import java.util.Scanner;
+	public  class Person37 {
+	public String getFullName(String firstName,String lastname){
+			String fullname=firstName+lastname;
+			return fullname;
+			
+		}
+		
+
+		public static void main(String[] args) {
+			//Person p=new Person("chandana","Reddy",'f');
+
+			Scanner sc=new Scanner(System.in);
+			Person37 P=new Person37();
+			System.out.println("Enter first name");
+			String firstName=sc.nextLine();
+			System.out.println("Enter Second name");
+			String lastName=sc.nextLine();
+		   String result=P.getFullName(firstName,lastName);
+		   System.out.println(result);
+	        sc.close();
+		}
+
+	}
+

@@ -1,0 +1,173 @@
+5.1: Refer the case study 2 in page no: 5 and create an application for that requirement by creating packages and classes as given below: 
+ 
+a) com.cg.eis.bean  In this package, create “Employee” class with different attributes such as id, name, salary, designation, insuranceScheme. 
+
+package com.cg.eis.bean;
+
+import com.cg.eis.exception.EmployeeException;
+
+public class Employee {
+	private int id;
+	private String name, designation, insuranceScheme;
+	private double salary;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDesignation() {
+		return designation;
+	}
+
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+
+	public String getInsuranceScheme() {
+		return insuranceScheme;
+	}
+
+	public void setInsuranceScheme(String insuranceScheme) {
+		this.insuranceScheme = insuranceScheme;
+	}
+
+	public double getSalary() {
+		return salary;
+	}
+
+	public void setSalary(double salary) throws EmployeeException {
+		if (salary < 3000) {
+			EmployeeException e1 = new EmployeeException("Salary less than 3000");
+			throw e1;
+		} else {
+			this.salary = salary;
+		}
+	}
+
+}
+
+ b) com.cg.eis.service   This package will contain code for services offered in Employee Insurance System. 
+The service class will have one EmployeeService Interface and its corresponding implementation class. 
+
+package com.cg.eis.service;
+
+interface EmployeeService {
+	String insuranceDetails(double salary, String designation);
+}
+
+public class EmployeeInsuranceScheme implements EmployeeService {
+
+	@Override
+	public String insuranceDetails(double salary, String designation) {
+		if(salary>5000 && salary<20000 && designation.equals("System Associate"))
+			return " Scheme C";
+		else if(salary>=20000 && salary<40000 && designation.equals("Programmer"))
+			return "Scheme B";
+		else if(salary>=40000&& designation.equals("Manager"))
+			return "Scheme A";
+		else if(salary<5000 && designation.equals("Clerk"))
+			return "No Scheme";
+		return null;
+	}
+
+}
+c) com.cg.eis.pl   This package will contain code for getting input from user, produce expected output to the user and invoke services offered by the system.  
+ 
+The services offered by this application currently are: i) Get employee details from user. 
+ii) Find the insurance scheme for an employee based on salary and designation.
+iii) Display all the details of an employee
+5.2: Use overrides annotation for the overridden methods available in a derived class of an interface of all the assignments
+package com.cg.eis.exception;
+
+public class EmployeeException extends RuntimeException {
+
+	String message;
+
+	public EmployeeException() {
+			message = "";
+		}
+
+	public EmployeeException(String message) {
+			this.message = message;
+		}
+
+	@Override
+	public String toString() {
+		return "[" + this.getClass().getName() + ":" + message + "]";
+	}
+
+	public String getMessage() {
+		return super.getMessage();
+	}
+
+}
+
+package com.cg.eis.pl;
+
+import com.cg.eis.bean.*;
+import com.cg.eis.exception.EmployeeException;
+import com.cg.eis.service.*;
+import java.util.*;
+
+public class UserInput {
+
+public static void main(String[] args) {
+@SuppressWarnings("resource")
+Scanner in = new Scanner(System.in);
+System.out.println("Enter Details of Employee");
+System.out.println("Enter ID Number");
+int id = in.nextInt();
+System.out.println("Enter Name");
+String name = in.next();
+System.out.println("Enter Designation Name (Programmer,System Associate,Manager,Clerk)");
+String designation = in.next();
+System.out.println("Enter salary");
+double salary = in.nextDouble();
+String insuranceScheme;
+
+Employee e = new Employee();
+e.setId(id);
+e.setName(name);
+e.setDesignation(designation);
+// e.setSalary(salary);
+EmployeeInsuranceScheme eis = new EmployeeInsuranceScheme();
+insuranceScheme = eis.insuranceDetails(salary, designation);
+e.setInsuranceScheme(insuranceScheme);
+try {
+e.setSalary(salary);
+System.out.println("Employee id " + e.getId());
+System.out.println("Employee Name " + e.getName());
+System.out.println("Employee designation " + e.getDesignation());
+System.out.println("Employee salary " + e.getSalary());
+System.out.println("Employee insurance scheme " + e.getInsuranceScheme());
+} catch (EmployeeException emp) {
+System.out.println(emp.toString());
+}
+
+ System.out.println("Employee id "+ e.getId());
+ System.out.println("Employee Name "+ e.getName());
+ System.out.println("Employee designation "+ e.getDesignation());
+ System.out.println("Employee salary "+ e.getSalary());
+ System.out.println("Employee insurance scheme "+ e.getInsuranceScheme());
+
+}
+
+public static void checkSalary(double salary) throws EmployeeException {
+if (salary < 3000) {
+EmployeeException e = new EmployeeException("Salary less than 3000");
+throw e;
+}
+}
+}

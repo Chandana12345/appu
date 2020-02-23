@@ -1,0 +1,148 @@
+1.)
+
+Insert rows with the following data into the Customer table. 6000, John, #115 Chicago, #115 Chicago, M, 25, 7878776, 10000
+6001, Jack, #116 France, #116 France, M, 25, 434524, 20000
+6002, James, #114 New York, #114 New York, M, 45, 431525, 15000.50
+Use parameter substitution.
+
+A.)
+
+SQL> insert into customermaster(customerid,customername,addr1,addr2,gender,age,phoneno,bill) 
+values(&customerid,&customername,&addr1,&addr2,&gender,&age,&phoneno,&bill);
+Enter value for customerid: 6000
+Enter value for customername: 'john'
+Enter value for addr1: '#115 chicago'
+Enter value for addr2: '#115 chicago'
+Enter value for gender: 'M'
+Enter value for age: 25
+Enter value for phoneno: 7878776
+Enter value for bill: 10000
+old   1: insert into customermaster(customerid,customername,address1,addr2,gender,age,phoneno,bill) values (&customerid,&customername,&addr1,&addr2,&gender,&age,&phoneno,&bill)
+new   1: insert into customermaster(customerid,customername,address1,addr2,gender,age,phoneno,bill) values (6000,'john','#115 chicago','#115 chicago','M',25,7878776,10000)
+
+1 row created.
+
+SQL> insert into customermaster(customerid,customername,addr1,addr2,gender,age,phoneno,bill) 
+values(&customerid,&customername,&addr1,&addr2,&gender,&age,&phoneno,&bill);
+Enter value for customerid: 6001
+Enter value for customername: 'Jack'
+Enter value for addr1: '#116 France'
+Enter value for addr2: '#116 France'
+Enter value for gender: 'M'
+Enter value for age: 25
+Enter value for phoneno: 434524
+Enter value for bill: 20000
+old   1: insert into customermaster(customerid,customername,address1,addr2,gender,age,phoneno,bill) values (&customerid,&customername,&addr1,&addr2,&gender,&age,&phoneno,&bill)
+new   1: insert into customermaster(customerid,customername,address1,addr2,gender,age,phoneno,bill) values (6001,'Jack','#116 France','#116 France','M',25,434524,20000)
+
+1 row created.
+
+SQL> insert into customermaster(customerid,customername,addr1,addr2,gender,age,phoneno,bill) 
+values(&customerid,&customername,&addr1,&addr2,&gender,&age,&phoneno,&bill);
+Enter value for customerid: 6002
+Enter value for customername: 'james'
+Enter value for addr1: '#114 New York'
+Enter value for addr2: '#114 New York'
+Enter value for gender: 'M'
+Enter value for age: 45
+Enter value for phoneno: 431525
+Enter value for bill: 15000.50
+old   1: insert into customermaster(customerid,customername,address1,addr2,gender,age,phoneno,bill) values (&customerid,&customername,&addr1,&addr2,&gender,&age,&phoneno,&bill)
+new   1: insert into customermaster(customerid,customername,address1,addr2,gender,age,phoneno,bill) values (6002,'james','#114 New York','#114 New York','M',45,431424,15000.50)
+
+1 row created.
+
+
+SQL> select * from customermaster;
+
+CUSTOMERID CUSTOMERNAME                   ADDR1
+---------- ------------------------------ ------------------------------
+ADDR2                          G        AGE    PHONENO       BILL
+------------------------------ - ---------- ---------- ----------
+      1000 Allen                          #115Chicago
+#115Chicago                    M         25    7878776
+
+      1001 George                         #116 France
+#116 France                    M         25     434524
+
+      6002 james                          #114 New york
+#114 New york                  M         45     431525      15001
+
+
+CUSTOMERID CUSTOMERNAME                   ADDR1
+---------- ------------------------------ ------------------------------
+ADDR2                          G        AGE    PHONENO       BILL
+------------------------------ - ---------- ---------- ----------
+      6000 john                           #115 Chicago
+#115 Chicago                   M         25    7878776      10000
+
+      6001 Jack                           #116 France
+#116 France                    M         25     434524      20000
+
+
+2.)
+
+Create a Savepoint named ‘SP1’ after third record in the Customer table
+
+A.)
+
+ 
+SQL> savepoint SP1;
+
+Savepoint created.
+
+3.)
+
+Insert the below row in the Customer table. 
+6003, John, #114 Chicago, #114 Chicago, M, 45, 439525, 19000.60
+
+A.)
+
+
+SQL> insert into customermaster values
+  2  (6003,'John','#114 Chicago','#114 Chicago','M',45,439525,19000.60);
+
+1 row created.
+
+SQL> set autocommit on;
+
+
+4.)
+
+Execute rollback statement in such a way that whatever manipulations 
+done before Savepoint sp1 are permanently implemented, and the ones 
+after Savepoint SP1 are not stored as a part of the Customer table.
+
+A.)
+
+
+SQL> rollback to savepoint SP1;
+
+Rollback complete.
+
+SQL> select * from customermaster;
+
+CUSTOMERID CUSTOMERNAME                   ADDR1
+---------- ------------------------------ ------------------------------
+ADDR2                          G        AGE    PHONENO       BILL
+------------------------------ - ---------- ---------- ----------
+      1000 Allen                          #115Chicago
+#115Chicago                    M         25    7878776
+
+      1001 George                         #116 France
+#116 France                    M         25     434524
+
+      6002 james                          #114 New york
+#114 New york                  M         45     431525      15001
+
+
+CUSTOMERID CUSTOMERNAME                   ADDR1
+---------- ------------------------------ ------------------------------
+ADDR2                          G        AGE    PHONENO       BILL
+------------------------------ - ---------- ---------- ----------
+      6000 john                           #115 Chicago
+#115 Chicago                   M         25    7878776      10000
+
+      6001 Jack                           #116 France
+#116 France                    M         25     434524      20000
+ 

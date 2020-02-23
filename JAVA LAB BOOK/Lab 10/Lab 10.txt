@@ -1,0 +1,30 @@
+10.1: Write a program to store a person details in a properties file named as “PersonProps.properties” and also do the following tasks: 
+a) Read data from properties file, load the data into Properties object and display the data in the console.
+ b) Read data from properties file(using getProperties method) and print data in the console
+package Lab10;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
+
+
+public class PersonProps {
+	
+	public static void main(String args[]) throws IOException
+	{
+		FileReader fr=new FileReader("F:\\cap\\details.properties.txt");
+		Properties p=new Properties();
+		p.load(fr);
+		System.out.println("Properties after loading : \n"+p);
+		System.out.println("\nafter using getproperty :");
+		System.out.println(p.getProperty("Name"));
+		System.out.println(p.getProperty("Phno"));
+	}
+
+}
+
+
+
+
+
+
