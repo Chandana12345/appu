@@ -1,0 +1,12 @@
+Dynamic View Diagrams-Use Case Diagrams
+
+1.1
+1. Cur_ICENTURIAN, Account Holder, Sav_ICENTURIAN, Email System are the actors in the above Use-case Diagram. 
+2. Email is acting as an interface between the server and the user.
+3. If the data sources were designed as apart of application, they would have acted as another actor on the server side.
+4. View account details, Request address change, View statements, View account summary, login, transfer funds, activate
+   destination account, create destination account
+   are the use cases invoked by Account Holder.
+5. Transfer fund has extension points. Create destination account, activate destination account are the extended use cases.
+6. No, this online system does not allow the user to pay insurance premiums. To allow the user to pay insurance premiums
+   a use class has to be created and connedted to the actor Account Holder.

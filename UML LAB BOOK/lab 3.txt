@@ -1,0 +1,16 @@
+3.1
+1.MainOptionForm, TransferFundsForm, TransferFundsController, Customer, TransferDetails, Account,
+  Savings Account, Current Account are the classes in the given diagram.
+2.String customerId, String firstName, String lastName are the attributes defined in the Customer Class.
+3.calculateTransactionFee(), executeTransfer(), getCustomer() are the operations defined in "TransferFundsController" Class.
+4.
+i.Generalization:Savings Account and Account,
+                 Current Account and Account.
+ii.Dependency:TransferFundsController and TransferDetails,
+              Customer and TransferDetails.
+iii.Association:TransferFundsForm and TransferFundsController,
+                Account and Customer.
+5.Yes, multiple accounts are allowed in the Bank and the duagram permits Joint Accounts.
+6. To depict the relationship that "Customer has Accounts" in the above diagram 
+   Aggregation symbol has to be drawn betweem Customer Class and Accounts.
+5.
