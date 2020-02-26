@@ -1,0 +1,4 @@
+Introduction to Classes and Objects
+
+2 Yes, Discrete Mathematics is a Class. Since, it has several sections in it. It is a blue print of 
+  Graph theory. It is also a sub-class of the class University. It defines the behaviour and state of the objects in it.
